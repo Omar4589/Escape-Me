@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS EscapeMe_db;
+CREATE DATABASE EscapeMe_db;
