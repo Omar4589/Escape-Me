@@ -2,9 +2,9 @@ const router = require("express").Router();
 const { User, Booking, EscapeRoom, Leaderboard, Review } = require("../models");
 //const withAuth = require("../utils/auth");
 
-// router.get("/", async (req, res) => {
-//   res.render("welcomePage");
-// });
+router.get("/", async (req, res) => {
+  res.render("welcomePage");
+});
 
 router.get("/login", async (req, res) => {
   if (req.session.logged_in) {
