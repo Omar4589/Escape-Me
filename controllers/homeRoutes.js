@@ -15,9 +15,9 @@ router.get("/login", async (req, res) => {
   res.render("loginPage");
 });
 
-// router.get("/signup", (req, res) => {
-//   res.render("signupPage");
-// });
+router.get("/signup", (req, res) => {
+  res.render("signupPage");
+});
 
 // router.get("/leaderboard", (req, res) => {
 //   res.render("leaderboardPage");
