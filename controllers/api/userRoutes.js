@@ -1,12 +1,5 @@
 const router = require("express").Router();
-const {
-  User,
-  Booking,
-  EscapeRoom,
-  Leaderboard,
-  Review,
-} = require("../../models");
-const withAuth = require("../../utils/auth");
+const { User } = require("../../models");
 
 router.post("/login", async (req, res) => {
   try {
@@ -49,8 +42,28 @@ router.post("/login", async (req, res) => {
 //     }
 //   });
 
-// router.post("/signup", (req, res) => {
-//   res.render("login");
-// });
+router.post("/signup", async (req, res) => {
+  try {
+    const newUser = await User.create(req.body);
+
+    // if (!newUser) {
+    //   res
+    //     .status(400)
+    //     .json({ message: "Something went wrong, please try again" });
+    //   return;
+    // }
+
+    req.session.save(() => {
+      req.session.user_id = newUser.id;
+      req.session.logged_in = true;
+    });
+
+    res.status(200).json(newUser);
+  } catch (err) {
+    console.log("Error occurred:");
+    console.log(err);
+    res.status(400).json("Server error");
+  }
+});
 
 module.exports = router;
