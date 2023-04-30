@@ -16,6 +16,14 @@
        <button class="text-white w-1/5 text-5xl  flex justify-center pb-2" id="menu-toggle">
           &#9776;
         </button>
+        <div class="dropdown-menu hidden bg-blue-500 text-white rounded py-2 absolute right-0 top-20 z-10" id="dropdown-menu">
+    <a href="#" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Profile</a>
+    <a href="#" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Settings</a>
+    <button id="logout" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Logout</button>
+  
+    <a href="#" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Report an issue</a>
+</div>
+
       <!--<div class="space-x-4">
         <a href="#" class="text-white">Sign Up</a>
         <a href="#" class="bg-white text-blue-500 px-4 py-2 rounded">Sign In</a>
@@ -36,5 +44,17 @@
         </div>
       </div>
     </footer>
+
+  <!-- Render script for logged in users only -->
+  {{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+  <script>
+        $(document).ready(function() {
+            $('#menu-toggle').on('click', function() {
+                $('#dropdown-menu').toggleClass('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
