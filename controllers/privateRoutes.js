@@ -1,22 +1,18 @@
 const router = require("express").Router();
-const { User, Booking, EscapeRoom, Leaderboard, Review } = require("../models");
+const { User } = require("../models");
 const withAuth = require("../utils/auth");
 
-router.get("/home", async (req, res) => {
+router.get("/home", withAuth, async (req, res) => {
   try {
-    // const userData = await User.findAll({
-    //   attributes: { exclude: ["password"] },
-    //   order: [["name", "ASC"]],
-    // });
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+      //include: [{ model: Booking }],
+    });
 
-    // const users = userData.map((project) => project.get({ plain: true }));
+    const user = userData.get({ plain: true });
 
-    res.render(
-      "userhomepage" //{
-      //users,
-      //logged_in: req.session.logged_in,
-      //}
-    );
+    res.render("userhomepage", { user, logged_in: true });
   } catch (err) {
     res.status(500).json(err);
   }

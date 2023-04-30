@@ -1,12 +1,5 @@
 const router = require("express").Router();
-const {
-  User,
-  Booking,
-  EscapeRoom,
-  Leaderboard,
-  Review,
-} = require("../../models");
-const withAuth = require("../../utils/auth");
+const { User } = require("../../models");
 
 router.post("/login", async (req, res) => {
   try {
@@ -53,12 +46,12 @@ router.post("/signup", async (req, res) => {
   try {
     const newUser = await User.create(req.body);
 
-    if (!newUser) {
-      res
-        .status(400)
-        .json({ message: "Something went wrong, please try again" });
-      return;
-    }
+    // if (!newUser) {
+    //   res
+    //     .status(400)
+    //     .json({ message: "Something went wrong, please try again" });
+    //   return;
+    // }
 
     req.session.save(() => {
       req.session.user_id = newUser.id;
@@ -66,8 +59,10 @@ router.post("/signup", async (req, res) => {
     });
 
     res.status(200).json(newUser);
-  } catch {
-    res.status(400).json(err);
+  } catch (err) {
+    console.log("Error occurred:");
+    console.log(err);
+    res.status(400).json("Server error");
   }
 });
 
