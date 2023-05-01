@@ -14,6 +14,10 @@ router.get("/login", async (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect("/home");
+    return;
+  }
   res.render("signupPage");
 });
 
