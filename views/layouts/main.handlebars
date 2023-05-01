@@ -10,22 +10,23 @@
 </head>
 <body>
     <header>
-        <header class="bg-blue-500">
+        <header class="bg-indigo-600">
     <nav class="container mx-auto flex justify-between items-center text-slate-50 p-4">
       <a href="/" class="w-4/5 font-bold text-4xl">Escape Me</a>
        <button class=" w-1/5 text-5xl  flex justify-center pb-2" id="menu-toggle">
           &#9776;
         </button>
-        <div class="dropdown-menu hidden bg-blue-500 text-white rounded py-2 absolute right-0 top-20 z-10 text-center" id="dropdown-menu">
+        <div class="dropdown-menu hidden bg-indigo-600 text-white rounded py-2 absolute right-0 top-20 z-10 text-center" id="dropdown-menu">
           {{#if logged_in}}
-    <a href="/profile" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Profile</a>
-    <a href="/settings" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Settings</a>
-    <button id="logout" class="block px-4 w-full py-2 hover:bg-white hover:text-blue-500">Logout</button>
+           <a href="/bookings" class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600">My Bookings</a>
+    <a href="/profile" class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600">Profile</a>
+    <a href="/settings" class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600">Settings</a>
+    <button id="logout" class="block px-4 w-full py-2 hover:bg-slate-50 hover:text-indigo-600">Logout</button>
     {{else}}
-    <a href="/signup" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Sign Up</a>
-    <a href="/login" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Sign In</a>
+    <a href="/signup" class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600">Sign Up</a>
+    <a href="/login" class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600">Sign In</a>
     {{/if}}
-    <a href="#" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Report an issue</a>
+    <a href="#" class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600">Report an issue</a>
 </div>
 
       <!--<div class="space-x-4">
@@ -36,10 +37,10 @@
   </header>
     </header>
     <main>{{{ body }}}</main>
-    <footer class="bg-blue-500 text-white py-6 px-4">
+    <footer class="bg-indigo-600 text-white py-6 px-4">
       <div class="text-center">
         <p class="text-xl">
-          &copy; 2023 Virtual Escape Room Booking System. All Rights Reserved.
+          &copy; 2023 Escape Me Virtual Escape Rooms. All Rights Reserved.
         </p>
         <div class="mt-4">
           <a href="/about" class="mr-4">About</a>
