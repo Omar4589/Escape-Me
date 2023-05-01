@@ -13,7 +13,7 @@ router.get("/home", withAuth, async (req, res) => {
     const user = await userData.get({ plain: true });
     console.info(user);
 
-    res.render("userhomepage", { ...user, logged_in: true });
+    res.render("userHomePage", { ...user, logged_in: true });
   } catch (err) {
     res.status(500).json(err);
   }
