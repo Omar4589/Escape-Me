@@ -10,7 +10,7 @@ router.get("/home", withAuth, async (req, res) => {
       //include: [{ model: Booking }],
     });
 
-    const user = userData.get({ plain: true });
+    const user = await userData.get({ plain: true });
 
     res.render("userhomepage", { user, logged_in: true });
   } catch (err) {
