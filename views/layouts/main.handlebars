@@ -16,11 +16,15 @@
        <button class="text-white w-1/5 text-5xl  flex justify-center pb-2" id="menu-toggle">
           &#9776;
         </button>
-        <div class="dropdown-menu hidden bg-blue-500 text-white rounded py-2 absolute right-0 top-20 z-10" id="dropdown-menu">
-    <a href="#" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Profile</a>
-    <a href="#" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Settings</a>
-    <button id="logout" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Logout</button>
-  
+        <div class="dropdown-menu hidden bg-blue-500 text-white rounded py-2 absolute right-0 top-20 z-10 text-center" id="dropdown-menu">
+          {{#if logged_in}}
+    <a href="/profile" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Profile</a>
+    <a href="/settings" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Settings</a>
+    <button id="logout" class="block px-4 w-full py-2 hover:bg-white hover:text-blue-500">Logout</button>
+    {{else}}
+    <a href="/signup" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Sign Up</a>
+    <a href="/login" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Sign In</a>
+    {{/if}}
     <a href="#" class="block px-4 py-2 hover:bg-white hover:text-blue-500">Report an issue</a>
 </div>
 
