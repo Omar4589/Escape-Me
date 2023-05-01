@@ -32,15 +32,15 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post('/logout', (req, res) => {
-    if (req.session.logged_in) {
-      req.session.destroy(() => {
-        res.status(204).end();
-      });
-    } else {
-      res.status(404).end();
-    }
-  });
+router.post("/logout", (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
 
 router.post("/signup", async (req, res) => {
   try {
@@ -56,9 +56,9 @@ router.post("/signup", async (req, res) => {
     req.session.save(() => {
       req.session.user_id = newUser.id;
       req.session.logged_in = true;
-    });
 
-    res.status(200).json(newUser);
+      res.status(200).json(newUser);
+    });
   } catch (err) {
     console.log("Error occurred:");
     console.log(err);
