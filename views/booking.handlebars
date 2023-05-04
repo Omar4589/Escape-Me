@@ -2,7 +2,7 @@
   <h1 class="text-4xl font-bold mb-8 text-center">Book Your Escape Room</h1>
 
   <div class="bg-white shadow-lg rounded-lg p-8">
-    <form action="/booking" method="POST">
+    <form id="booking-form">
       <div class="mb-6">
         <label
           class="block text-gray-700 text-sm font-bold mb-2"
@@ -14,20 +14,24 @@
           name="escape-room"
         >
           <!-- Beginner Level -->
-          <option value="room1">Beginner: The Lost Treasure of Captain
-            Blackbeard</option>
-          <option value="room2">Beginner: Mystery at the Museum</option>
-          <option value="room3">Beginner: Escape from Candyland</option>
+          <option
+            value="The Lost Treasure of Captain
+            Blackbeard"
+          >Beginner: The Lost Treasure of Captain Blackbeard</option>
+          <option value="Mystery at the Museum">Beginner: Mystery at the Museum</option>
+          <option value="roEscape from Candylandom3">Beginner: Escape from
+            Candyland</option>
 
           <!-- Intermediate Level -->
-          <option value="room4">Intermediate: Secrets of the Pharaoh's Tomb</option>
-          <option value="room5">Intermediate: Time Travel Heist</option>
-          <option value="room6">Intermediate: The Haunted Mansion</option>
+          <option value="Secrets of the Pharaoh's Tomb">Intermediate: Secrets of
+            the Pharaoh's Tomb</option>
+          <option value="Time Travel Heist">Intermediate: Time Travel Heist</option>
+          <option value="The Haunted Mansion">Intermediate: The Haunted Mansion</option>
 
           <!-- Expert Level -->
-          <option value="room7">Expert: The Alien Conspiracy</option>
-          <option value="room8">Expert: The Impossible Heist</option>
-          <option value="room9">Expert: Mind Maze</option>
+          <option value="The Alien Conspiracy">Expert: The Alien Conspiracy</option>
+          <option value="The Impossible Heist">Expert: The Impossible Heist</option>
+          <option value="Mind Maze">Expert: Mind Maze</option>
         </select>
       </div>
 
@@ -66,3 +70,5 @@
     </form>
   </div>
 </div>
+
+<script src="/js/booking.js"></script>

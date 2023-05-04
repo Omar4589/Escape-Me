@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, Booking } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 router.post("/login", async (req, res) => {
   try {
@@ -63,6 +64,23 @@ router.post("/signup", async (req, res) => {
     console.log("Error occurred:");
     console.log(err);
     res.status(400).json("Server error");
+  }
+});
+
+// POST request for a new booking
+router.post("/booking", withAuth, async (req, res) => {
+  try {
+    const newBooking = await Booking.create({
+      escape_room: req.body.escapeRoom,
+      user_id: req.session.user_id,
+      date: req.body.date,
+      time: req.body.time,
+    });
+
+    res.status(201).json({ message: "Booking created", booking: newBooking });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
   }
 });
 
