@@ -1,42 +1,74 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escape Me</title>
-     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <header class="bg-indigo-600">
-    <nav class="container mx-auto flex justify-between items-center text-slate-50 p-4">
-      <a href="/" class="w-4/5 font-bold text-4xl">Escape Me</a>
-       <button class=" w-1/5 text-5xl  flex justify-center pb-2" id="menu-toggle">
-          &#9776;
-        </button>
-        <div class="dropdown-menu hidden bg-indigo-600 text-white rounded py-2 absolute right-0 top-20 z-10 text-center" id="dropdown-menu">
+      <header class="bg-indigo-600">
+        <nav
+          class="container mx-auto flex justify-between items-center text-slate-50 p-4"
+        >
           {{#if logged_in}}
-           <a href="/bookings" class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600">My Bookings</a>
-    <a href="/profile" class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600">Profile</a>
-    <a href="/settings" class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600">Settings</a>
-    <button id="logout" class="block px-4 w-full py-2 hover:bg-slate-50 hover:text-indigo-600">Logout</button>
-    {{else}}
-    <a href="/signup" class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600">Sign Up</a>
-    <a href="/login" class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600">Sign In</a>
-    {{/if}}
-    <a href="#" class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600">Report an issue</a>
-</div>
+            <a href="/home" class="w-4/5 font-bold text-4xl">Escape Me</a>
+          {{else}}
+            <a href="/" class="w-4/5 font-bold text-4xl">Escape Me</a>
+          {{/if}}
+          <button
+            class="w-1/5 text-5xl flex justify-center pb-2"
+            id="menu-toggle"
+          >
+            &#9776;
+          </button>
+          <div
+            class="dropdown-menu hidden bg-indigo-600 text-white rounded py-2 absolute right-0 top-20 z-10 text-center"
+            id="dropdown-menu"
+          >
+            {{#if logged_in}}
+              <a
+                href="/bookings"
+                class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600"
+              >My Bookings</a>
+              <a
+                href="/profile"
+                class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600"
+              >Profile</a>
+              <a
+                href="/settings"
+                class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600"
+              >Settings</a>
+              <button
+                id="logout"
+                class="block px-4 w-full py-2 hover:bg-slate-50 hover:text-indigo-600"
+              >Logout</button>
+            {{else}}
+              <a
+                href="/signup"
+                class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600"
+              >Sign Up</a>
+              <a
+                href="/login"
+                class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600"
+              >Sign In</a>
+            {{/if}}
+            <a
+              href="#"
+              class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600"
+            >Report an issue</a>
+          </div>
 
-      <!--<div class="space-x-4">
+          <!--<div class="space-x-4">
         <a href="#" class="text-white">Sign Up</a>
         <a href="#" class="bg-white text-blue-500 px-4 py-2 rounded">Sign In</a>
       </div>-->
-    </nav>
-  </header>
+        </nav>
+      </header>
     </header>
-    <main>{{{ body }}}</main>
+    <main>{{{body}}}</main>
     <footer class="bg-indigo-600 text-white py-6 px-4">
       <div class="text-center">
         <p class="text-xl">
@@ -50,16 +82,13 @@
       </div>
     </footer>
 
-  <!-- Render script for logged in users only -->
-  {{#if logged_in}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
-  <script>
-        $(document).ready(function() {
-            $('#menu-toggle').on('click', function() {
-                $('#dropdown-menu').toggleClass('hidden');
-            });
-        });
+    <!-- Render script for logged in users only -->
+    {{#if logged_in}}
+      <script src="/js/logout.js"></script>
+    {{/if}}
+    <script>
+      $(document).ready(function() { $('#menu-toggle').on('click', function() {
+      $('#dropdown-menu').toggleClass('hidden'); }); });
     </script>
-</body>
+  </body>
 </html>
