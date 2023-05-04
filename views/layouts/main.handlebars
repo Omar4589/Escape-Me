@@ -13,7 +13,11 @@
         <nav
           class="container mx-auto flex justify-between items-center text-slate-50 p-4"
         >
-          <a href="/" class="w-4/5 font-bold text-4xl">Escape Me</a>
+          {{#if logged_in}}
+            <a href="/home" class="w-4/5 font-bold text-4xl">Escape Me</a>
+          {{else}}
+            <a href="/" class="w-4/5 font-bold text-4xl">Escape Me</a>
+          {{/if}}
           <button
             class="w-1/5 text-5xl flex justify-center pb-2"
             id="menu-toggle"
