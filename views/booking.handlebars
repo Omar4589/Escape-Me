@@ -1,0 +1,68 @@
+<div class="container mx-auto px-4 py-12">
+  <h1 class="text-4xl font-bold mb-8 text-center">Book Your Escape Room</h1>
+
+  <div class="bg-white shadow-lg rounded-lg p-8">
+    <form action="/booking" method="POST">
+      <div class="mb-6">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="escape-room"
+        >Select Escape Room:</label>
+        <select
+          class="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3"
+          id="escape-room"
+          name="escape-room"
+        >
+          <!-- Beginner Level -->
+          <option value="room1">Beginner: The Lost Treasure of Captain
+            Blackbeard</option>
+          <option value="room2">Beginner: Mystery at the Museum</option>
+          <option value="room3">Beginner: Escape from Candyland</option>
+
+          <!-- Intermediate Level -->
+          <option value="room4">Intermediate: Secrets of the Pharaoh's Tomb</option>
+          <option value="room5">Intermediate: Time Travel Heist</option>
+          <option value="room6">Intermediate: The Haunted Mansion</option>
+
+          <!-- Expert Level -->
+          <option value="room7">Expert: The Alien Conspiracy</option>
+          <option value="room8">Expert: The Impossible Heist</option>
+          <option value="room9">Expert: Mind Maze</option>
+        </select>
+      </div>
+
+      <div class="mb-6">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="booking-date"
+        >Select Date:</label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="booking-date"
+          type="date"
+          name="booking-date"
+          required
+        />
+      </div>
+
+      <div class="mb-6">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="booking-time"
+        >Select Time:</label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="booking-time"
+          type="time"
+          name="booking-time"
+          required
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline"
+      >Book Now</button>
+    </form>
+  </div>
+</div>
