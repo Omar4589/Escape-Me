@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../models");
+const { User, Booking } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/home", withAuth, async (req, res) => {
@@ -31,6 +31,30 @@ router.get("/booking", withAuth, async (req, res) => {
     res.render("booking", { ...user, logged_in: true });
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+// GET request for mybookings view
+router.get("/mybookings", withAuth, async (req, res) => {
+  try {
+    const bookingsData = await Booking.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+
+    const bookings = bookingsData.map((booking) =>
+      booking.get({ plain: true })
+    );
+    console.log(bookings);
+
+    res.render("mybookings", {
+      bookings,
+      logged_in: true,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
   }
 });
 

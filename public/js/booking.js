@@ -3,10 +3,10 @@ $(document).ready(() => {
   const $escapeRoom = $("#escape-room");
   const $bookingDate = $("#booking-date");
   const $bookingTime = $("#booking-time");
-  const $submitBtn = $("#submit-booking");
+  const $bookingForm = $("#booking-form");
 
   // Handle form submission
-  $submitBtn.on("click", async (event) => {
+  $bookingForm.on("submit", async (event) => {
     event.preventDefault();
 
     // Collect form data
@@ -23,7 +23,7 @@ $(document).ready(() => {
 
     try {
       // Send a POST request with the booking data
-      const response = await fetch("/api/bookings", {
+      const response = await fetch("/api/users/booking", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

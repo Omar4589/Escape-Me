@@ -1,5 +1,5 @@
 const User = require("./User");
-// const Booking = require("./Booking");
+ const Booking = require("./Booking");
 // const UserBooking = require("./UserBooking");
 // const EscapeRoom = require("./EscapeRoom");
 // const Leaderboard = require("./Leaderboard");
@@ -12,7 +12,7 @@ const User = require("./User");
 
 module.exports = {
   User,
-  // Booking,
+   Booking,
   // UserBooking,
   // EscapeRoom,
   // Leaderboard,
