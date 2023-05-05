@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Booking } = require("../models");
+const { User, Booking, EscapeRoom } = require("../models");
 const withAuth = require("../utils/auth");
 
 router.get("/home", withAuth, async (req, res) => {
@@ -28,8 +28,18 @@ router.get("/booking", withAuth, async (req, res) => {
 
     const user = await userData.get({ plain: true });
 
-    res.render("booking", { ...user, logged_in: true });
+    // Fetch the escape rooms from the database
+    const escapeRoomsData = await EscapeRoom.findAll({
+      order: [["difficulty", "ASC"]],
+    });
+
+    const escapeRooms = escapeRoomsData.map((escapeRoom) =>
+      escapeRoom.get({ plain: true })
+    );
+
+    res.render("booking", { ...user, escapeRooms, logged_in: true }); // Pass the escapeRooms to the template
   } catch (err) {
+    console.info(err);
     res.status(500).json(err);
   }
 });
@@ -46,7 +56,6 @@ router.get("/mybookings", withAuth, async (req, res) => {
     const bookings = bookingsData.map((booking) =>
       booking.get({ plain: true })
     );
-    console.log(bookings);
 
     res.render("mybookings", {
       bookings,

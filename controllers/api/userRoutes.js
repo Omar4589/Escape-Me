@@ -71,7 +71,8 @@ router.post("/signup", async (req, res) => {
 router.post("/booking", withAuth, async (req, res) => {
   try {
     const newBooking = await Booking.create({
-      escape_room: req.body.escapeRoom,
+      escape_room_theme: req.body.escape_room_theme,
+      escape_room_id: req.body.escape_room_id,
       user_id: req.session.user_id,
       date: req.body.date,
       time: req.body.time,

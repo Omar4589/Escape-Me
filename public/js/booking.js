@@ -9,19 +9,25 @@ $(document).ready(() => {
   $bookingForm.on("submit", async (event) => {
     event.preventDefault();
 
-    // Collect form data
-    const bookingData = {
-      escapeRoom: $escapeRoom.val(),
-      date: $bookingDate.val(),
-      time: $bookingTime.val(),
-    };
-
-    // Validate form data
-    if (!bookingData.escapeRoom || !bookingData.date || !bookingData.time) {
-      return;
-    }
-
     try {
+      // Collect form data
+      const bookingData = {
+        escape_room_id: $escapeRoom.val(), // Use escapeRoomId instead of the combined value
+        date: $bookingDate.val(),
+        time: $bookingTime.val(),
+      };
+
+      console.log(bookingData);
+
+      // Validate form data
+      if (
+        !bookingData.escape_room_id ||
+        !bookingData.date ||
+        !bookingData.time
+      ) {
+        return;
+      }
+
       // Send a POST request with the booking data
       const response = await fetch("/api/users/booking", {
         method: "POST",
