@@ -22,8 +22,7 @@ const signupFormHandler = async (event) => {
         alert("Something went wrong, please try again");
       }
     }
-  }
-  else {
+  } else {
     alert("Something went wrong, please try again");
   }
 };
