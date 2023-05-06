@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection");
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
 class EscapeRoom extends Model {}
 
@@ -34,10 +34,10 @@ EscapeRoom.init(
   },
   {
     sequelize,
-    modelName: "escaperoom",
+    modelName: 'escaperoom',
     timestamps: true,
-    createdAt: "created_at",
-    updatedAt: "updated_at",
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   }
 );
 
