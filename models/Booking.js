@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection");
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
 class Booking extends Model {}
 
@@ -14,16 +14,16 @@ Booking.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "user",
-        key: "id",
+        model: 'user',
+        key: 'id',
       },
     },
     escape_room_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "escaperooms",
-        key: "id",
+        model: 'escaperooms',
+        key: 'id',
       },
     },
     date: {
@@ -37,10 +37,10 @@ Booking.init(
   },
   {
     sequelize,
-    modelName: "booking",
+    modelName: 'booking',
     timestamps: true,
-    createdAt: "created_at",
-    updatedAt: "updated_at",
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
   }
 );
 
