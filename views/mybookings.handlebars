@@ -20,7 +20,7 @@
     <tbody class="bg-white divide-y divide-gray-200">
       {{#each bookings}}
         <tr>
-          <td class="px-6 py-4 whitespace-nowrap">{{this.escape_room_id}}</td>
+          <td class="px-6 py-4 whitespace-nowrap">{{this.escaperoom.theme}}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{formatDate this.date}}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{formatTime this.time}}</td>
         </tr>

@@ -51,6 +51,11 @@ router.get("/mybookings", withAuth, async (req, res) => {
       where: {
         user_id: req.session.user_id,
       },
+      include: [
+        {
+          model: EscapeRoom,
+        },
+      ],
     });
 
     const bookings = bookingsData.map((booking) =>
