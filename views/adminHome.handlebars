@@ -1,74 +1,94 @@
 <div class="bg-gray-100 min-h-screen">
-  <section class="text-slate-950 text-center py-10 w-4/5 mx-auto">
+  <section class="text-slate-950 text-center pt-10 pb-5 w-4/5 mx-auto">
     <h1 class="text-4xl font-bold text-center py-2">
-      Welcome to the Admin Center!
+      Welcome
+      {{name}}
+      &#128075;
     </h1>
-    <p class="text-xl mt-4 text-center">
-      Manage your bookings, users, escape rooms, and business hours all from this convenient dashboard.
+    <p class="text-xl text-center">
+      Manage bookings, users, escape rooms, and business hours all from this
+      convenient dashboard.
     </p>
   </section>
-  <section class="py-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 md:mx-10">
-    <div class="rounded-lg bg-white p-6 shadow-lg text-center">
-      <h3 class="font-semibold text-3xl mb-4">Manage Bookings</h3>
-      <p class="text-xl">
-        View, edit, or cancel bookings.
-      </p>
-      <a
-        href="/admin/bookings"
-        class="bg-blue-700 text-slate-50 font-bold py-3 px-6 mt-6 inline-block rounded hover:bg-blue-800"
-      >Manage Bookings</a>
-    </div>
-    <div class="rounded-lg bg-white p-6 shadow-lg text-center">
-      <h3 class="font-semibold text-3xl mb-4">Manage Users</h3>
-      <p class="text-xl">
-        View or edit user accounts.
-      </p>
-      <a
-        href="/admin/users"
-        class="bg-blue-700 text-slate-50 font-bold py-3 px-6 mt-6 inline-block rounded hover:bg-blue-800"
-      >Manage Users</a>
-    </div>
-    <div class="rounded-lg bg-white p-6 shadow-lg text-center">
-      <h3 class="font-semibold text-3xl mb-4">Manage Escape Rooms</h3>
-      <p class="text-xl">
-        Add new rooms, edit existing ones, or temporarily disable rooms for maintenance.
-      </p>
-      <a
-        href="/admin/rooms"
-        class="bg-blue-700 text-slate-50 font-bold py-3 px-6 mt-6 inline-block rounded hover:bg-blue-800"
-      >Manage Rooms</a>
-    </div>
-    <div class="rounded-lg bg-white p-6 shadow-lg text-center">
-      <h3 class="font-semibold text-3xl mb-4">Manage Business Hours</h3>
-      <p class="text-xl">
-        Adjust your business hours.
-      </p>
-      <a
-        href="/admin/hours"
-        class="bg-blue-700 text-slate-50 font-bold py-3 px-6 mt-6 inline-block rounded hover:bg-blue-800"
-      >Manage Business Hours</a>
-    </div>
+
+  <section
+    class="py-3 grid grid-cols-1 gap-y-8 md:grid-cols-2 md:mb-24 "
+  >
+    <a href="/admin/bookings"><div
+        class="flex items-center rounded-lg p-5 bg-white text-center mx-5 shadow-lg lg:h-36"
+      >
+        <h3
+          class="font-semibold text-xl border-r-2 border-gray-300 pr-4 mr-4 lg:text-3xl"
+        >Manage Bookings</h3>
+        <p class="text-lg lg:text-2xl">
+          View, edit, or cancel bookings.
+        </p>
+
+      </div></a>
+
+    <a href="/admin/users">
+      <div
+        class="flex items-center rounded-lg bg-white p-5 mx-5 text-center shadow-lg lg:h-36"
+      >
+        <h3
+          class="font-semibold text-xl border-r-2 border-gray-300 pr-4 mr-4 lg:text-3xl"
+        >Manage Users</h3>
+        <p class="text-lg lg:text-2xl">View or edit user accounts.</p>
+      </div>
+    </a>
+
+    <a href="/admin/rooms">
+      <div
+        class="flex items-center rounded-lg p-5 bg-white text-center mx-5 shadow-lg lg:h-36"
+      >
+        <h3
+          class="font-semibold text-xl border-r-2 border-gray-300 pr-4 mr-4 lg:text-3xl"
+        >Manage Escape Rooms</h3>
+        <p class="text-lg lg:text-2xl">
+          Add, edit, or temporarily disable rooms.
+        </p>
+
+      </div></a>
+
+    <a href="/admin/hours"><div
+        class="flex items-center rounded-lg p-5 bg-white text-center mx-5 shadow-lg lg:h-36"
+      >
+        <h3
+          class="font-semibold text-xl border-r-2 border-gray-300 pr-4 mr-4 lg:text-3xl"
+        >Manage Business Hours</h3>
+        <p class="text-lg lg:text-2xl">
+          Adjust your business hours.
+        </p>
+
+      </div></a>
+
   </section>
-  <section class="py-8 grid grid-cols-1 gap-8 md:grid-cols-2 md:mx-10">
-    <div class="rounded-lg bg-white p-6 shadow-lg text-center">
-      <h3 class="font-semibold text-3xl mb-4">Notifications</h3>
-      <p class="text-xl">
-        Review latest system notifications and alerts.
-      </p>
-      <a
-        href="/admin/notifications"
-        class="bg-blue-700 text-slate-50 font-bold py-3 px-6 mt-6 inline-block rounded hover:bg-blue-800"
-      >Check Notifications</a>
-    </div>
-    <div class="rounded-lg bg-white p-6 shadow-lg text-center">
-      <h3 class="font-semibold text-3xl mb-4">Analytics</h3>
-      <p class="text-xl">
-        Check your business performance.
-      </p>
-      <a
-        href="/admin/analytics"
-        class="bg-blue-700 text-slate-50 font-bold py-3 px-6 mt-6 inline-block rounded hover:bg-blue-800"
-      >View Analytics</a>
-    </div>
+
+  <section class="py-8 grid grid-cols-1 gap-y-8  ">
+
+    <a href="/admin/notifications"><div
+        class="flex items-center rounded-lg p-5 bg-white text-center mx-5 shadow-lg"
+      >
+        <h3
+          class="py-5 font-semibold text-xl border-r-2 border-gray-300 pr-4 mr-4 md:w-1/3 lg:text-3xl"
+        >Notifications</h3>
+        <p class="text-lg w-full lg:text-2xl">
+          Review latest system notifications and alerts.
+        </p>
+
+      </div></a>
+
+    <a href="/admin/analytics">
+      <div
+        class="flex items-center text-center rounded-lg p-5 bg-white text-center mx-5 shadow-lg"
+      >
+        <h3
+          class="py-5 font-semibold text-xl border-r-2 border-gray-300 pr-4 mr-4 md:w-1/3 lg:text-3xl"
+        >Analytics</h3>
+        <p class="text-lg w-full lg:text-2xl">
+          Check your business performance.
+        </p>
+      </div></a>
+
   </section>
 </div>
