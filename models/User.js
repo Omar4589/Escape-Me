@@ -6,6 +6,11 @@ class User extends Model {
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
+
+  toSafeObject() {
+    const { id, name, email } = this.dataValues;
+    return { id, name, email };
+  }
 }
 
 User.init(
@@ -35,6 +40,11 @@ User.init(
         len: [8],
       },
     },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    }
   },
   {
     hooks: {
