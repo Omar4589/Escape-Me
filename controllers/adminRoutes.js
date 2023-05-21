@@ -1,11 +1,10 @@
 const router = require("express").Router();
 const { User, Booking, EscapeRoom } = require("../models");
-const withAuth = require("../utils/auth");
-const { Op } = require("sequelize");
+const withAuthAdmin = require("../utils/auth2");
 const dayjs = require("dayjs");
 
 //Get route for admin home
-router.get("/home", async (req, res) => {
+router.get("/home", withAuthAdmin, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
@@ -22,7 +21,7 @@ router.get("/home", async (req, res) => {
 });
 
 //Get route for  manage bookings view
-router.get("/bookings/:date", async (req, res) => {
+router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
