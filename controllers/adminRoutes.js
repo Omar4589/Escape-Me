@@ -34,23 +34,25 @@ router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
       where: {
         date: req.params.date,
       },
-      include: [{ model: EscapeRoom }, { model: User,attributes: { exclude: ["password", "isAdmin"], }, }],
+      include: [
+        { model: EscapeRoom },
+        { model: User, attributes: { exclude: ["password", "isAdmin"] } },
+      ],
       order: [
         ["date", "ASC"],
         ["time", "ASC"],
       ],
     });
 
-  
-
     const escapeRoomData = await EscapeRoom.findAll();
 
     // Convert bookingData instances to plain objects
     const bookings = bookingData.map((booking) => booking.get({ plain: true }));
-    console.log(bookings);
     const escaperooms = escapeRoomData.map((room) => room.get({ plain: true }));
 
     const user = await userData.get({ plain: true });
+
+    const date = dayjs(req.params.date).format("MM/DD/YYYY");
 
     res.render("managebookings", {
       ...user,

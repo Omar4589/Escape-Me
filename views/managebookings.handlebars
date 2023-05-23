@@ -12,7 +12,7 @@
     <div class="flex justify-between items-center mb-5">
       <div class="flex items-center">
         <button id="left-arrow" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2">←</button>
-        <p id="date" data-current-date="{{currentDate}}" class="text-xl"></p>
+        <p id="date" class="text-xl">{{date}}</p>
         <button id="right-arrow" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 ml-2">→</button>
       </div>
 
@@ -62,43 +62,36 @@
 
 <script>
 //handle on date element
-let todaysDate = dayjs()
+const preformattedDate = $('#date').text();
+console.log(preformattedDate);
+const formattedDate = dayjs(preformattedDate);
+console.log(formattedDate);
 
-$('#date').text(`Date: ${todaysDate.format('MM/DD/YYYY')}`);
+//$('#date').text("Date: {{date}}");
 
-const refreshBookings = async (date) => {
+const refreshBookings = (date) => {
   try {
-    const response = await fetch(`/admin/bookings/${date}`);
-    const bookingsData = await response.json();
-  
-    // Update the date
-    $('.text-xl').text(`Date: ${dayjs(date).format('MM/DD/YYYY')}`);
-    // Clear old bookings
-    $('#bookings').empty();
-  
+    d = date;
+    window.location.href=`/admin/bookings/${d}`;
   } catch (error) {
     console.error('Error:', error);
   }
 }
 
 
-
-
-
-
 $('#left-arrow').on('click', () => {
   console.log("you clicked the left arrow")
-  todaysDate = todaysDate.subtract(1, 'day'); // Subtract one day using dayjs
-  $('#date').text(`Date: ${todaysDate.format('MM/DD/YYYY')}`);
- refreshBookings(todaysDate.format('YYYY-MM-DD'));
+  nextDate = formattedDate.subtract(1, 'day'); // Subtract one day using dayjs
+  $('#date').text(`Date: ${nextDate.format('MM/DD/YYYY')}`);
+ refreshBookings(nextDate.format('YYYY-MM-DD'));
 });
 
 
 $('#right-arrow').on('click', () => {
   console.log("you clicked the left arrow")
- todaysDate = todaysDate.add(1, 'day'); // Add one day using dayjs
-  $('#date').text(`Date: ${todaysDate.format('MM/DD/YYYY')}`);
-   refreshBookings(todaysDate.format('YYYY-MM-DD'));
+ prevDate = formattedDate.add(1, 'day'); // Add one day using dayjs
+  $('#date').text(`Date: ${prevDate.format('MM/DD/YYYY')}`);
+   refreshBookings(prevDate.format('YYYY-MM-DD'));
   });
 
 </script>
