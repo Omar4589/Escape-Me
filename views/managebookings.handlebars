@@ -1,0 +1,97 @@
+   <div class="bg-gray-100 min-h-screen p-5">
+  <section class="text-slate-950 text-center pt-10 pb-5 w-4/5 mx-auto">
+    <h1 class="text-4xl font-bold text-center py-2 lg:text-6xl xl:text-5xl">
+      Manage Bookings
+    </h1>
+    <p class="text-xl text-center lg:text-3xl lg:py-5 xl:text-2xl">
+      View, edit, or cancel bookings for any date.
+    </p>
+  </section>
+
+  <section class="py-3 px-5">
+    <div class="flex justify-between items-center mb-5">
+      <div class="flex items-center">
+        <button id="left-arrow" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2">←</button>
+        <p id="date" class="text-xl">{{date}}</p>
+        <button id="right-arrow" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 ml-2">→</button>
+      </div>
+
+       <div class="mt-5">
+      <p class="text-lg font-bold mb-2">Filter by Escape Room:</p>
+      <select class="bg-white h-10 px-3 rounded-full text-sm focus:outline-none">
+        <option value="">All</option>
+        <!-- Add options for each escape room. -->
+        {{#each escaperooms}}
+          <option value="{{this.theme}}">{{this.theme}}</option>
+        {{/each}}
+      </select>
+    </div>
+      
+      <div class="relative">
+        <input type="text" class="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none" placeholder="Search bookings">
+        <button type="submit" class="absolute right-0 top-0 mt-2 mr-4">
+          <!-- Add the SVG for the search icon here -->
+        </button>
+      </div>
+    </div>
+    
+    <div id="bookings">
+      {{#each bookings}}
+        <div class="bg-white rounded-lg shadow-lg p-5 mb-5">
+          <h3 class="text-xl font-bold">{{this.escaperoom.theme}}</h3>
+          <p>Time: {{formatTime this.time}}</p>
+          <p>Date: {{formatDate this.date}}</p>
+          <p>Booked by: {{this.user.name}}</p>
+          <div class="flex justify-end">
+            <button class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-700 mr-2">✎</button>
+            <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-700">✕</button>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+   
+  </section>
+</div>
+
+  <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
+
+<script>
+//handle on date element
+const preformattedDate = $('#date').text();
+console.log(preformattedDate);
+const formattedDate = dayjs(preformattedDate);
+console.log(formattedDate);
+
+//$('#date').text("Date: {{date}}");
+
+const refreshBookings = (date) => {
+  try {
+    d = date;
+    window.location.href=`/admin/bookings/${d}`;
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+
+$('#left-arrow').on('click', () => {
+  console.log("you clicked the left arrow")
+  nextDate = formattedDate.subtract(1, 'day'); // Subtract one day using dayjs
+  $('#date').text(`Date: ${nextDate.format('MM/DD/YYYY')}`);
+ refreshBookings(nextDate.format('YYYY-MM-DD'));
+});
+
+
+$('#right-arrow').on('click', () => {
+  console.log("you clicked the left arrow")
+ prevDate = formattedDate.add(1, 'day'); // Add one day using dayjs
+  $('#date').text(`Date: ${prevDate.format('MM/DD/YYYY')}`);
+   refreshBookings(prevDate.format('YYYY-MM-DD'));
+  });
+
+</script>
