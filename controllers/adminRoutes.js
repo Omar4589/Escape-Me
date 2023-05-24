@@ -68,13 +68,24 @@ router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
 
 router.get("/users", withAuthAdmin, async (req, res) => {
   try {
+    // Find the logged in user based on the session ID
+    const adminData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+      //include: [{ model: Booking }],
+    });
     //find all users that are not admins
-    const userData = User.findAll({ where: { isAdmin: false } });
+    const userData = await User.findAll({
+      where: { isAdmin: false },
+      attributes: { exclude: ["password", "isAdmin"] },
+    });
 
     //serialize results
     const users = await userData.map((user) => user.get({ plain: true }));
+
+    const admin = await adminData.get({ plain: true });
+
     //render results using handlebars
-    res.render("manageusers", { user, logged_in: true });
+    res.render("manageusers", { users, admin, logged_in: true });
   } catch (err) {
     res.status(500).json(err);
   }
