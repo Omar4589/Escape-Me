@@ -18,9 +18,8 @@
         >
           <option value="">All</option>
           <!-- Add options for each escape room. -->
-          {{#each users}}
-            <option value="name">Name</option>
-          {{/each}}
+          <option value="name">Name</option>
+          <option value="email">Email</option>
         </select>
       </div>
 
@@ -50,6 +49,14 @@
           <th
             scope="col"
             class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+          >Date Created</th>
+           <th
+            scope="col"
+            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+          >Last Updated</th>
+          <th
+            scope="col"
+            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
           >Edit or Delete User</th>
         </tr>
       </thead>
@@ -58,6 +65,8 @@
           <tr>
             <td class="px-6 py-4">{{this.name}}</td>
             <td class="px-6 py-4">{{this.email}}</td>
+            <td class="px-6 py-4">{{formatDate this.created_at}}</td>
+            <td class="px-6 py-4">{{formatDate this.updated_at}}</td>
             <td class="flex justify-center items-center px-6 py-4"><button
                 class="mx-6 px-3 py-1 bg-green-500 text-white rounded hover:bg-green-700 mr-2"
               >✎</button>

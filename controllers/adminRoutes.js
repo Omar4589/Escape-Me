@@ -83,7 +83,7 @@ router.get("/users", withAuthAdmin, async (req, res) => {
     const users = await userData.map((user) => user.get({ plain: true }));
 
     const admin = await adminData.get({ plain: true });
-
+console.log(users);
     //render results using handlebars
     res.render("manageusers", { users, admin, logged_in: true });
   } catch (err) {
