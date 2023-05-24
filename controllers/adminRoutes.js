@@ -66,4 +66,18 @@ router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
   }
 });
 
+router.get("/users", withAuthAdmin, async (req, res) => {
+  try {
+    //find all users that are not admins
+    const userData = User.findAll({ where: { isAdmin: false } });
+
+    //serialize results
+    const users = await userData.map((user) => user.get({ plain: true }));
+    //render results using handlebars
+    res.render("manageusers", { user, logged_in: true });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
