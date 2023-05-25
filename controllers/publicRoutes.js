@@ -25,6 +25,11 @@ router.get("/signup", (req, res) => {
   res.render("signupPage");
 });
 
+router.get("/escaperooms", (req, res) => {
+ 
+  res.render("escapeRooms");
+});
+
 // router.get("/leaderboard", (req, res) => {
 //   res.render("leaderboardPage");
 // });
