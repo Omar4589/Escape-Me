@@ -15,18 +15,24 @@
 <section class="py-12 px-4">
   <div class="container mx-auto">
     <h2 class="text-4xl font-bold mb-8 text-center">Escape Rooms</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-slate-950">
+    <div
+      id="escape-rooms"
+      class="grid grid-cols-1 md:grid-cols-3 gap-8 text-slate-950"
+    >
       <!-- Begin escape room card loop -->
       {{#each rooms}}
-        <div class="bg-white shadow-lg rounded-lg p-6">
+        <div
+          id="{{this.theme}}"
+          class="escape-room bg-white shadow-lg rounded-lg p-6"
+        >
           <img
             src="{{this.image_url}}"
             alt="{{this.theme}}"
             class="w-full h-56 object-cover mb-6 rounded"
           />
-          <h3 class="text-xl font-bold mb-1">{{this.theme}}</h3>
+          <h3 id="escape-room-theme" class="text-xl font-bold mb-1">{{this.theme}}</h3>
           <p class="mb-1">Difficulty: {{this.difficulty}}</p>
-          <p class="text-gray-600">{{this.description}}</p>
+          <p class="">Duration: {{this.duration}}min</p>
         </div>
       {{/each}}
 
@@ -34,3 +40,74 @@
     </div>
   </div>
 </section>
+
+<modal
+  id="escape-room-modal"
+  class="fixed hidden h-screen inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+><div
+    class="overscroll-contain max-h-screen overflow-y-auto relative bg-white p-6 rounded-lg shadow-lg w-full max-w-lg"
+  >
+    <span
+      id="closeModal"
+      class="absolute top-5 right-8 text-xl font-bold cursor-pointer"
+    >&times;</span>
+    <h2 class="font-bold text-4xl my-4" id="theme"></h2>
+    <div class="flex flex-wrap justify-between">
+      <div class="w-full md:w-1/3">
+        <img
+          id="escape-room-image"
+          class="w-full h-auto rounded-lg mb-4"
+          alt="Escape Room Image"
+        />
+        <div class="flex items-center justify-between">
+
+        </div>
+      </div>
+      <div class="w-full md:w-2/3 pl-4">
+        <div class="flex text-center items-start justify-between mb-2">
+          <p class="font-semibold text-lg">Diffculty Level:</p>
+          <p id="difficulty-level" class="text-right ml-2"></p>
+        </div>
+        <div class="flex text-center items-start justify-between mb-2">
+          <p class="font-semibold text-lg">Duration:</p>
+          <p id="duration" class="text-right ml-2"></p>
+        </div>
+        <div class="flex text-center items-start justify-between mb-2">
+          <p class="font-semibold text-lg">Description:</p>
+          <p id="description" class="text-right ml-2"></p>
+        </div>
+
+      </div>
+    </div>
+    <button
+      id="book-room"
+      class="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold"
+    >Book This Room</button>
+
+  </div></modal>
+
+<script>
+
+  const escapeRoomCards = $('.escape-room'); escapeRoomCards.on('click', async (e) => { 
+    const escapeRoomTheme = e.currentTarget.id;
+    const response = await fetch(`http://localhost:3001/${escapeRoomTheme}`);
+    
+    const data = await response.json();
+    console.log(data.rooms[0]);
+    console.log("-----------------")
+    
+    //open a modal that displays the escape room information
+  console.log(e.currentTarget);
+
+
+const img = $('#escape-room-image').attr('src', data.rooms[0].image_url);
+const theme = $('#theme').text(data.rooms[0].theme);
+const difficulty = $('#difficulty-level').text(data.rooms[0].difficulty);
+const duration = $('#duration').text(data.rooms[0].duration);
+const description = $('#description').text(data.rooms[0].description);
+  const modal = $('#escape-room-modal').removeClass('hidden');
+ 
+  
+   });
+  
+</script>
