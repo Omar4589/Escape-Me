@@ -1,7 +1,7 @@
 <!-- Hero Section -->
 <section class="bg-indigo-600 text-white p-5 rounded-lg my-5 mx-3">
   <div class="container mx-auto text-center mb-2">
-    <h1 class="text-4xl font-bold mb-6">Welcome to EscapeMe, {{name}}</h1>
+    <h1 class="text-4xl font-bold mb-3">Welcome to EscapeMe, {{name}}</h1>
     <p class="text-lg mb-5">Experience the thrill of our escape rooms and book
       your next adventure!</p>
     <a
@@ -15,117 +15,94 @@
 <section class="py-12 px-4">
   <div class="container mx-auto">
     <h2 class="text-4xl font-bold mb-8 text-center">Escape Rooms</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-slate-950">
-      <h3 class="text-2xl font-bold text-center">Beginner Level:</h3>
+    <div
+      id="escape-rooms"
+      class="grid grid-cols-1 md:grid-cols-3 gap-8 text-slate-950"
+    >
       <!-- Begin escape room card loop -->
-      <div class="bg-white shadow-lg rounded-lg p-6">
-        <img
-          src="/img/treasure.jpg"
-          alt="The Lost Treasure of Captain Blackbeard"
-          class="w-full h-56 object-cover mb-6 rounded"
-        />
-        <h3 class="text-xl font-bold mb-2">The Lost Treasure of Captain
-          Blackbeard</h3>
-        <p class="text-gray-600">Players must find the hidden treasure of the
-          infamous pirate Captain Blackbeard before it's lost forever.</p>
-      </div>
+      {{#each rooms}}
+        <div
+          id="{{this.theme}}"
+          class="escape-room bg-white shadow-lg rounded-lg p-6"
+        >
+          <img
+            src="{{this.image_url}}"
+            alt="{{this.theme}}"
+            class="w-full h-56 object-cover mb-6 rounded"
+          />
+          <h3 id="escape-room-theme" class="text-xl font-bold mb-1">{{this.theme}}</h3>
+          <p class="mb-1">Difficulty: {{this.difficulty}}</p>
+          <p class="">Duration: {{this.duration}}min</p>
+        </div>
+      {{/each}}
 
-      <div class="bg-white shadow-lg rounded-lg p-6">
-        <img
-          src="/img/museum.jpeg"
-          alt="Mystery at the Museum"
-          class="w-full h-56 object-cover mb-6 rounded"
-        />
-        <h3 class="text-xl font-bold mb-2">Mystery at the Museum</h3>
-        <p class="text-gray-600">Participants have to solve the mystery of the
-          stolen artifact from the museum and catch the thief before time runs
-          out.</p>
-      </div>
-
-      <div class="bg-white shadow-lg rounded-lg p-6">
-        <img
-          src="/img/candyland.jpg"
-          alt="Escape from Candyland"
-          class="w-full h-56 object-cover mb-6 rounded"
-        />
-        <h3 class="text-xl font-bold mb-2">Escape from Candyland</h3>
-        <p class="text-gray-600">Players find themselves trapped in a whimsical
-          candy wonderland and must solve various puzzles to escape before the
-          sugar rush ends.</p>
-      </div>
-
-      <h3 class="text-2xl font-bold text-center">Intermediate Level:</h3>
-
-      <div class="bg-white shadow-lg rounded-lg p-6">
-        <img
-          src="/img/pharoah.jpeg"
-          alt="Secrets of the Pharaoh's Tomb"
-          class="w-full h-56 object-cover mb-6 rounded"
-        />
-        <h3 class="text-xl font-bold mb-2">Secrets of the Pharaoh's Tomb</h3>
-        <p class="text-gray-600">Adventurers must explore an ancient Egyptian
-          tomb, decipher hieroglyphs, and solve riddles to uncover the secrets
-          hidden within.</p>
-      </div>
-
-      <div class="bg-white shadow-lg rounded-lg p-6">
-        <img
-          src="/img/timetravel.jpeg"
-          alt="Time Travel Heist"
-          class="w-full h-56 object-cover mb-6 rounded"
-        />
-        <h3 class="text-xl font-bold mb-2">Time Travel Heist</h3>
-        <p class="text-gray-600">Players become time-traveling thieves, tasked
-          with stealing valuable artifacts from different eras while avoiding
-          the watchful eye of the Time Police.</p>
-      </div>
-      <div class="bg-white shadow-lg rounded-lg p-6">
-        <img
-          src="/img/mansionhaunted.png"
-          alt="The Haunted Mansion"
-          class="w-full h-56 object-cover mb-6 rounded"
-        />
-        <h3 class="text-xl font-bold mb-2">The Haunted Mansion</h3>
-        <p class="text-gray-600">Participants must navigate through the haunted
-          mansion, uncovering the dark secrets hidden within its walls and break
-          the curse before the spirits claim them.</p>
-      </div>
-
-      <h3 class="text-2xl font-bold text-center">Expert Level:</h3>
-      <div class="bg-white shadow-lg rounded-lg p-6">
-        <img
-          src="/img/area51.jpeg"
-          alt="The Alien Conspiracy"
-          class="w-full h-56 object-cover mb-6 rounded"
-        />
-        <h3 class="text-xl font-bold mb-2">The Alien Conspiracy</h3>
-        <p class="text-gray-600">Players must infiltrate a top-secret government
-          facility, uncover evidence of extraterrestrial life, and expose the
-          truth before the world is forever changed.</p>
-      </div>
-      <div class="bg-white shadow-lg rounded-lg p-6">
-        <img
-          src="/img/hacked.jpeg"
-          alt="The Impossible Heist"
-          class="w-full h-56 object-cover mb-6 rounded"
-        />
-        <h3 class="text-xl font-bold mb-2">The Impossible Heist</h3>
-        <p class="text-gray-600">As a team of elite thieves, players have to
-          plan and execute the perfect heist, evading advanced security systems
-          and leaving no trace behind.</p>
-      </div>
-      <div class="bg-white shadow-lg rounded-lg p-6">
-        <img
-          src="/img/brainmaze.jpeg"
-          alt="Mind Maze"
-          class="w-full h-56 object-cover mb-6 rounded"
-        />
-        <h3 class="text-xl font-bold mb-2">Mind Maze</h3>
-        <p class="text-gray-600">Participants are trapped in a labyrinth created
-          by a twisted genius. They must solve mind-bending puzzles and decipher
-          complex codes to escape before their time runs out.</p>
-      </div>
       <!-- End of escape room card loop -->
     </div>
   </div>
 </section>
+
+<modal
+  id="escape-room-modal"
+  class="fixed hidden h-screen inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+><div
+    class="overscroll-contain max-h-screen overflow-y-auto relative bg-white p-6 rounded-lg shadow-lg w-full max-w-lg"
+  >
+    <span
+      id="closeModal"
+      class="absolute top-5 right-8 text-xl font-bold cursor-pointer"
+    >&times;</span>
+    <h2 class="font-bold text-4xl my-4" id="theme"></h2>
+    <div class="flex flex-wrap justify-between">
+      <div class="w-full md:w-1/3">
+        <img
+          id="escape-room-image"
+          class="w-full h-auto rounded-lg mb-4"
+          alt="Escape Room Image"
+        />
+        <div class="flex items-center justify-between">
+
+        </div>
+      </div>
+      <div class="w-full md:w-2/3 pl-4">
+        <div class="flex text-center items-start justify-between mb-2">
+          <p class="font-semibold text-lg">Diffculty Level:</p>
+          <p id="difficulty-level" class="text-right ml-2"></p>
+        </div>
+        <div class="flex text-center items-start justify-between mb-2">
+          <p class="font-semibold text-lg">Duration:</p>
+          <p id="duration" class="text-right ml-2"></p>
+        </div>
+        <div class="flex text-center items-start justify-between mb-2">
+          <p class="font-semibold text-lg">Description:</p>
+          <p id="description" class="text-right ml-2"></p>
+        </div>
+
+      </div>
+    </div>
+    <button
+      id="book-room"
+      class="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold"
+    >Book This Room</button>
+
+  </div></modal>
+
+<script>
+
+  const escapeRoomCards = $('.escape-room'); escapeRoomCards.on('click', async (e) => { 
+    const escapeRoomTheme = e.currentTarget.id;
+    const domain = window.location.hostname;
+    const response = await fetch(`http://${domain}/${escapeRoomTheme}`); //change this to actual website URL in produciton, use template literal to insert domain variable
+    const data = await response.json();
+    //open a modal that displays the escape room information
+const img = $('#escape-room-image').attr('src', data.rooms[0].image_url);
+const theme = $('#theme').text(data.rooms[0].theme);
+const difficulty = $('#difficulty-level').text(data.rooms[0].difficulty);
+const duration = $('#duration').text(data.rooms[0].duration);
+const description = $('#description').text(data.rooms[0].description);
+const modal = $('#escape-room-modal').removeClass('hidden');
+ });
+
+   $("#closeModal").on("click", () => $("#escape-room-modal").addClass("hidden"));
+
+  
+</script>

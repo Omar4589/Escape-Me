@@ -12,7 +12,13 @@ router.get("/home", withAuth, async (req, res) => {
 
     const user = await userData.get({ plain: true });
 
-    res.render("userHomePage", { ...user, logged_in: true });
+    const escapeRoomsData = await EscapeRoom.findAll();
+
+    const rooms = await escapeRoomsData.map((room) =>
+      room.get({ plain: true })
+    );
+
+    res.render("userHomePage", { ...user, rooms, logged_in: true });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -69,6 +75,22 @@ router.get("/mybookings", withAuth, async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Server Error");
+  }
+});
+
+router.get("/:escaperoomtheme", withAuth, async (req, res) => {
+  try {
+    const escapeRoomData = await EscapeRoom.findAll({
+      where: {
+        theme: req.params.escaperoomtheme,
+      },
+    });
+
+    const rooms = await escapeRoomData.map((room) => room.get({ plain: true }));
+
+    res.status(200).json({ rooms });
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

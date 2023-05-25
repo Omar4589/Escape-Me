@@ -82,7 +82,7 @@ const refreshBookings = (date) => {
 $('#left-arrow').on('click', () => {
   console.log("you clicked the left arrow")
   nextDate = formattedDate.subtract(1, 'day'); // Subtract one day using dayjs
-  $('#date').text(`Date: ${nextDate.format('MM/DD/YYYY')}`);
+  $('#date').text(`${nextDate.format('MM/DD/YYYY')}`);
  refreshBookings(nextDate.format('YYYY-MM-DD'));
 });
 
@@ -90,7 +90,7 @@ $('#left-arrow').on('click', () => {
 $('#right-arrow').on('click', () => {
   console.log("you clicked the left arrow")
  prevDate = formattedDate.add(1, 'day'); // Add one day using dayjs
-  $('#date').text(`Date: ${prevDate.format('MM/DD/YYYY')}`);
+  $('#date').text(`${prevDate.format('MM/DD/YYYY')}`);
    refreshBookings(prevDate.format('YYYY-MM-DD'));
   });
 
