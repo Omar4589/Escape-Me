@@ -12,7 +12,12 @@ router.get("/home", withAuth, async (req, res) => {
 
     const user = await userData.get({ plain: true });
 
-    res.render("userHomePage", { ...user, logged_in: true });
+    const escapeRoomsData = await EscapeRoom.findAll();
+
+    const rooms = await escapeRoomsData.map((room) => room.get({ plain: true }));
+    console.log(rooms)
+
+    res.render("userHomePage", { ...user, rooms, logged_in: true });
   } catch (err) {
     res.status(500).json(err);
   }
