@@ -21,7 +21,7 @@ router.get("/home", withAuthAdmin, async (req, res) => {
 });
 
 //Get route for  manage bookings view
-router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
+router.get("/bookings/", withAuthAdmin, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
@@ -31,9 +31,6 @@ router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
 
     // Find all bookings for the given date
     const bookingData = await Booking.findAll({
-      where: {
-        date: req.params.date,
-      },
       include: [
         { model: EscapeRoom },
         { model: User, attributes: { exclude: ["password", "isAdmin"] } },
@@ -52,7 +49,7 @@ router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
 
     const user = await userData.get({ plain: true });
 
-    const date = dayjs(req.params.date).format("MM/DD/YYYY");
+    // this does nothing rn , delete it if we dont need it const date = dayjs(req.params.date).format("MM/DD/YYYY");
 
     res.render("managebookings", {
       ...user,
@@ -65,6 +62,79 @@ router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+//Get route for  manage bookings view
+router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
+  try {
+    // Find all bookings for the given date
+    const bookings = await Booking.findAll({
+      where: {
+        date: req.params.date,
+      },
+      include: [
+        { model: EscapeRoom },
+        { model: User, attributes: { exclude: ["password", "isAdmin"] } },
+      ],
+      order: [
+        ["date", "ASC"],
+        ["time", "ASC"],
+      ],
+    });
+
+    res.status(200).json(bookings);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// This route will delete the booking that is equal to the ID
+router.delete("/bookings/:id", withAuthAdmin, async (req, res) => {
+  try {
+    const deleteBooking = await Booking.destroy({
+      where: { id: req.params.id },
+    });
+    if (!deleteBooking) {
+      res.status(404).json({ message: "No booking with this ID found" });
+      return;
+    }
+    res.status(200).json({ message: "The booking has been deleted" });
+  } catch (err) {
+    res.status(500).json({ message: "An error has occured" });
+    console.log(err);
+  }
+});
+
+// //Get route for  manage bookings view
+// router.get("/bookings/:id", async (req, res) => {
+//   try {
+//     console.log("Received ID:", req.params.id); // Log received ID
+
+//     // Parse the received ID to integer (sequelize uses integer)
+//     const id = parseInt(req.params.id);
+//     console.log("Parsed ID:", id); // Log parsed ID
+
+//     // Find all bookings for the given id
+//     const bookings = await Booking.findAll({
+//       where: {
+//         escape_room_id: id,
+//       },
+//       include: [
+//         { model: EscapeRoom },
+//         { model: User, attributes: { exclude: ["password", "isAdmin"] } },
+//       ],
+//       order: [
+//         ["date", "ASC"],
+//         ["time", "ASC"],
+//       ],
+//     });
+
+//     console.log(bookings);
+
+//     res.status(200).json(bookings);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 router.get("/users", withAuthAdmin, async (req, res) => {
   try {
@@ -83,7 +153,7 @@ router.get("/users", withAuthAdmin, async (req, res) => {
     const users = await userData.map((user) => user.get({ plain: true }));
 
     const admin = await adminData.get({ plain: true });
-console.log(users);
+    console.log(users);
     //render results using handlebars
     res.render("manageusers", { users, admin, logged_in: true });
   } catch (err) {
