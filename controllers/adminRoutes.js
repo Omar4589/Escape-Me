@@ -80,12 +80,61 @@ router.get("/bookings/:date", async (req, res) => {
         ["time", "ASC"],
       ],
     });
-    
+
     res.status(200).json(bookings);
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+// This route will delete the booking that is equal to the ID
+router.delete("/bookings/:id", withAuthAdmin, async (req, res) => {
+  try {
+    const deleteBooking = await Booking.destroy({
+      where: { id: req.params.id },
+    });
+    if (!deleteBooking) {
+      res.status(404).json({ message: "No booking with this ID found" });
+      return;
+    }
+    res.status(200).json({ message: "The booking has been deleted" });
+  } catch (err) {
+    res.status(500).json({ message: "An error has occured" });
+    console.log(err);
+  }
+});
+
+// //Get route for  manage bookings view
+// router.get("/bookings/:id", async (req, res) => {
+//   try {
+//     console.log("Received ID:", req.params.id); // Log received ID
+
+//     // Parse the received ID to integer (sequelize uses integer)
+//     const id = parseInt(req.params.id);
+//     console.log("Parsed ID:", id); // Log parsed ID
+
+//     // Find all bookings for the given id
+//     const bookings = await Booking.findAll({
+//       where: {
+//         escape_room_id: id,
+//       },
+//       include: [
+//         { model: EscapeRoom },
+//         { model: User, attributes: { exclude: ["password", "isAdmin"] } },
+//       ],
+//       order: [
+//         ["date", "ASC"],
+//         ["time", "ASC"],
+//       ],
+//     });
+
+//     console.log(bookings);
+
+//     res.status(200).json(bookings);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 router.get("/users", withAuthAdmin, async (req, res) => {
   try {

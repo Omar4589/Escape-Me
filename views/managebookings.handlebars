@@ -1,4 +1,4 @@
-   <div class="bg-gray-100 min-h-screen p-5">
+<div class="bg-gray-100 min-h-screen p-5">
   <section class="text-slate-950 text-center pt-10 pb-5 w-4/5 mx-auto">
     <h1 class="text-4xl font-bold text-center py-2 lg:text-6xl xl:text-5xl">
       Manage Bookings
@@ -11,119 +11,54 @@
   <section class="py-3 px-5">
     <div class="flex justify-between items-center mb-5">
       <div class="flex items-center">
-        <button id="left-arrow" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2">←</button>
+        <button
+          id="left-arrow"
+          class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2"
+        >←</button>
         <p id="date" class="text-xl">{{date}}</p>
-        <button id="right-arrow" class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 ml-2">→</button>
+        <button
+          id="right-arrow"
+          class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 ml-2"
+        >→</button>
       </div>
 
-       <div class="mt-5">
-      <p class="text-lg font-bold mb-2">Filter by Escape Room:</p>
-      <select class="bg-white h-10 px-3 rounded-full text-sm focus:outline-none">
-        <option value="">All</option>
-        <!-- Add options for each escape room. -->
-        {{#each escaperooms}}
-          <option value="{{this.theme}}">{{this.theme}}</option>
-        {{/each}}
-      </select>
-    </div>
-      
+      <div class="mt-5">
+        <label for="rooms" class="text-lg font-bold mb-2">Filter by Escape Room:</label>
+        <select
+          name="rooms"
+          id="rooms"
+          class="bg-white h-10 px-3 rounded-full text-sm focus:outline-none"
+        >
+          <option value="">All</option>
+          <!-- Add options for each escape room. -->
+          {{#each escaperooms}}
+            <option value="{{this.id}}">{{this.theme}}</option>
+          {{/each}}
+        </select>
+      </div>
+
       <div class="relative">
-        <input type="text" class="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none" placeholder="Search bookings">
+        <input
+          type="text"
+          class="bg-white h-10 px-5 pr-10 rounded-full text-sm focus:outline-none"
+          placeholder="Search bookings"
+        />
         <button type="submit" class="absolute right-0 top-0 mt-2 mr-4">
           <!-- Add the SVG for the search icon here -->
         </button>
       </div>
     </div>
-    
+
     <div id="bookings"></div>
 
-   
   </section>
 </div>
 
-  <script
-      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
-      crossorigin="anonymous"
-    ></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+  integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+  crossorigin="anonymous"
+></script>
 
-<script>
-//handle on date element
-const preformattedDate = $('#date').text();
-//console.log(preformattedDate);
-//console.log('--------')
-const formattedDate = dayjs(preformattedDate).format('YYYY-MM-DD')
-//console.log(formattedDate);
-
-//$('#date').text("Date: {{date}}");
-
-const fetchBookings = async (date) => {
-  try {
-    const query = date;
-    const response = await fetch(`http://localhost:3001/admin/bookings/${query}`);
-    const data = await response.json();
-    //console.log("----BOOKING DATA UNDERNEATH-----")
-    //console.log(data);
-    return data;
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
-
-const formatTime = (time) => {
-  // Parse the time in the "HH:mm" format
-  const parsedTime = dayjs(`2023-01-01T${time}`);
-  // Format the parsed time in the "hh:mm A" format
-  return parsedTime.format('hh:mm A');
-};
-
-const displayBookings = async () => {
-  const bookings = await fetchBookings(formattedDate);
-
-$('#bookings').empty();
-bookings.forEach((booking) => {
-const bookingTime = formatTime(booking.time);
-
-  //create div that will contain booking
-  const bookingDiv = $('<div>').addClass('bg-white rounded-lg shadow-lg p-5 mb-5');
-    //create h3 element
-      const heading = $('<h3>').addClass('text-xl font-bold').html(booking.escaperoom.theme);
-    //p element time
-      const time = $('<p>').text('Time: ').html('Time: ' + bookingTime);
-    //p element date
-      const date = $('<p>').text('Date: ').html('Date: ' + dayjs(booking.date).format('MM/DD/YYYY'));
-    //p element name
-      const name = $('<p>').text('Booked By: ').html('Booked By: ' + booking.user.name);
-    //div
-      const options = $('<div>').addClass('flex justify-end');
-    //button, edit
-      const edit = $('<button>').addClass('px-3 py-1 bg-green-500 text-white rounded hover:bg-green-700 mr-2').text('✎');
-    //button, delete
-      const remove = $('<button>').addClass('px-3 py-1 bg-red-500 text-white rounded hover:bg-red-700').text('✕');
-
-//append all elements
-options.append(edit, remove);
-bookingDiv.append(heading, time, date, name, options);
-$('#bookings').append(bookingDiv);
-});
-}
-
-displayBookings();
-
-
-$('#left-arrow').on('click', () => {
-  console.log("you clicked the left arrow")
-  nextDate = formattedDate.subtract(1, 'day'); // Subtract one day using dayjs
-  $('#date').text(`${nextDate.format('MM/DD/YYYY')}`);
- refreshBookings(nextDate.format('YYYY-MM-DD'));
-});
-
-
-$('#right-arrow').on('click', () => {
-  console.log("you clicked the left arrow")
- prevDate = formattedDate.add(1, 'day'); // Add one day using dayjs
-  $('#date').text(`${prevDate.format('MM/DD/YYYY')}`);
-   refreshBookings(prevDate.format('YYYY-MM-DD'));
-  });
-
+<script src="/js/managebookings.js">
 </script>
