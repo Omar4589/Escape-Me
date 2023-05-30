@@ -18,6 +18,21 @@ const fetchBookingsbyDate = async (date) => {
   }
 };
 
+// const fetchBookingsbyUser = async (userName) => {
+//   try {
+//     const query = userName;
+//     const response = await fetch(
+//       `http://localhost:3001/admin/bookings/${query}`
+//     );
+//     const data = await response.json();
+//     //console.log("----BOOKING DATA UNDERNEATH-----")
+//     console.log(data);
+//     return data;
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// };
+
 // const fetchBookingsbyTheme = async (roomid) => {
 //   try {
 //     console.log(roomid);
@@ -138,6 +153,11 @@ const deleteBooking = async (event, booking) => {
     alert("Delete unsuccessful.  Please try again.");
   }
 };
+
+// const searchBar = $('#user-search');
+// searchBar.on('submit', () =>{
+
+// });
 
 // $("#rooms").on("change", async () => {
 //   let id = $("#rooms").val();
