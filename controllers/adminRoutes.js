@@ -21,7 +21,7 @@ router.get("/home", withAuthAdmin, async (req, res) => {
 });
 
 //Get route for  manage bookings view
-router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
+router.get("/bookings/", withAuthAdmin, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
@@ -31,9 +31,6 @@ router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
 
     // Find all bookings for the given date
     const bookingData = await Booking.findAll({
-      where: {
-        date: req.params.date,
-      },
       include: [
         { model: EscapeRoom },
         { model: User, attributes: { exclude: ["password", "isAdmin"] } },
@@ -52,7 +49,7 @@ router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
 
     const user = await userData.get({ plain: true });
 
-    const date = dayjs(req.params.date).format("MM/DD/YYYY");
+    // this does nothing rn , delete it if we dont need it const date = dayjs(req.params.date).format("MM/DD/YYYY");
 
     res.render("managebookings", {
       ...user,
@@ -61,6 +58,30 @@ router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
       date: dayjs(req.params.date).format("MM/DD/YYYY"),
       logged_in: true,
     });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//Get route for  manage bookings view
+router.get("/bookings/:date", async (req, res) => {
+  try {
+    // Find all bookings for the given date
+    const bookings = await Booking.findAll({
+      where: {
+        date: req.params.date,
+      },
+      include: [
+        { model: EscapeRoom },
+        { model: User, attributes: { exclude: ["password", "isAdmin"] } },
+      ],
+      order: [
+        ["date", "ASC"],
+        ["time", "ASC"],
+      ],
+    });
+    
+    res.status(200).json(bookings);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -83,7 +104,7 @@ router.get("/users", withAuthAdmin, async (req, res) => {
     const users = await userData.map((user) => user.get({ plain: true }));
 
     const admin = await adminData.get({ plain: true });
-console.log(users);
+    console.log(users);
     //render results using handlebars
     res.render("manageusers", { users, admin, logged_in: true });
   } catch (err) {
