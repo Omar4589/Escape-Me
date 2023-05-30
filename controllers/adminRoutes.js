@@ -64,7 +64,7 @@ router.get("/bookings/", withAuthAdmin, async (req, res) => {
 });
 
 //Get route for  manage bookings view
-router.get("/bookings/:date", async (req, res) => {
+router.get("/bookings/:date", withAuthAdmin, async (req, res) => {
   try {
     // Find all bookings for the given date
     const bookings = await Booking.findAll({
