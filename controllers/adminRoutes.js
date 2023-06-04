@@ -104,37 +104,33 @@ router.delete("/bookings/:id", withAuthAdmin, async (req, res) => {
   }
 });
 
-// //Get route for  manage bookings view
-// router.get("/bookings/:id", async (req, res) => {
-//   try {
-//     console.log("Received ID:", req.params.id); // Log received ID
+//Get route for  manage bookings view
+router.get("/bookings/:id/:date", async (req, res) => {
+  try {
+   
 
-//     // Parse the received ID to integer (sequelize uses integer)
-//     const id = parseInt(req.params.id);
-//     console.log("Parsed ID:", id); // Log parsed ID
+    // Find all bookings for the given id
+    const bookings = await Booking.findAll({
+      where: {
+        escape_room_id: req.params.id, date: req.params.date
+      },
+      include: [
+        { model: EscapeRoom },
+        { model: User, attributes: { exclude: ["password", "isAdmin"] } },
+      ],
+      order: [
+        ["date", "ASC"],
+        ["time", "ASC"],
+      ],
+    });
 
-//     // Find all bookings for the given id
-//     const bookings = await Booking.findAll({
-//       where: {
-//         escape_room_id: id,
-//       },
-//       include: [
-//         { model: EscapeRoom },
-//         { model: User, attributes: { exclude: ["password", "isAdmin"] } },
-//       ],
-//       order: [
-//         ["date", "ASC"],
-//         ["time", "ASC"],
-//       ],
-//     });
+    console.log(bookings);
 
-//     console.log(bookings);
-
-//     res.status(200).json(bookings);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+    res.status(200).json(bookings);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.get("/users", withAuthAdmin, async (req, res) => {
   try {
