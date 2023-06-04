@@ -107,12 +107,11 @@ router.delete("/bookings/:id", withAuthAdmin, async (req, res) => {
 //Get route for  manage bookings view
 router.get("/bookings/:id/:date", async (req, res) => {
   try {
-   
-
     // Find all bookings for the given id
     const bookings = await Booking.findAll({
       where: {
-        escape_room_id: req.params.id, date: req.params.date
+        escape_room_id: req.params.id,
+        date: req.params.date,
       },
       include: [
         { model: EscapeRoom },
@@ -132,7 +131,7 @@ router.get("/bookings/:id/:date", async (req, res) => {
   }
 });
 
-router.get("/users", withAuthAdmin, async (req, res) => {
+router.get("/manageusers", withAuthAdmin, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const adminData = await User.findByPk(req.session.user_id, {
@@ -157,6 +156,18 @@ router.get("/users", withAuthAdmin, async (req, res) => {
   }
 });
 
+router.get("/users", withAuthAdmin, async (req, res) => {
+  try {
+    const users = await User.findAll({where: {isAdmin: false }});
+    if (!users) {
+      res.status(400).json({ message: "No users found" });
+    }
+    res.status(200).json(users);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 //DELETE route for deleting a user
 router.delete("/users/:id", withAuthAdmin, async (req, res) => {
   try {
@@ -173,6 +184,5 @@ router.delete("/users/:id", withAuthAdmin, async (req, res) => {
     console.log(err);
   }
 });
-
 
 module.exports = router;

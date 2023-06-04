@@ -59,25 +59,21 @@
             class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
           >Edit or Delete User</th>
         </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200">
-        {{#each users}}
-          <tr>
-            <td class="px-6 py-4">{{this.name}}</td>
-            <td class="px-6 py-4">{{this.email}}</td>
-            <td class="px-6 py-4">{{formatDate this.created_at}}</td>
-            <td class="px-6 py-4">{{formatDate this.updated_at}}</td>
-            <td class="flex justify-center items-center px-6 py-4"><button
-                class="mx-6 px-3 py-1 bg-green-500 text-white rounded hover:bg-green-700 mr-2"
-              >✎</button>
-              <button
-                class="mx-6 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-700"
-              >✕</button></td>
-          </tr>
-        {{/each}}
-      </tbody>
+      <tbody class="bg-white divide-y divide-gray-200" id="users-list"></tbody>
 
     </table>
 
   </section>
 </div>
+
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+  integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+  crossorigin="anonymous"
+></script>
+
+
+<script src="/js/manageusers.js">
+</script>
