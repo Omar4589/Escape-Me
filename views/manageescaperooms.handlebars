@@ -1,1 +1,19 @@
-<HI1>LOL</HI1>
+<div class="bg-gray-100 min-h-screen">
+  <div class="mx-5"><button
+      class="my-5 bg-blue-700 rounded-lg text-center text-slate-50 px-2 py-1"
+    >+ Create Room</button>
+  </div>
+  <h1 class="text-center text-3xl">Active Rooms</h1>
+  <div id="room-list" class="grid md:grid-cols-2 lg:grid-cols-3">
+    {{#each rooms}}
+      <div class="escape-room bg-white rounded-lg mx-8 my-5 py-2 px-5">
+        <h1 class="text-2xl text-center p-2">{{this.theme}}</h1>
+        <img src={{this.image_url}} alt="Escape Room Image" class="rounded-md" />
+        {{!-- <p class="py-2">{{this.description}}</p>
+        <p>Difficulty: {{this.difficulty}} </p>
+        <p>Duration: {{this.duration}}</p> --}}
+      </div>
+    {{/each}}
+  </div>
+   <h1 class="text-center text-3xl">Disabled Rooms</h1>
+</div>

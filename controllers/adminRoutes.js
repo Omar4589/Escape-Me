@@ -188,7 +188,14 @@ router.delete("/users/:id", withAuthAdmin, async (req, res) => {
 //GET route to display manage escape rooms view
 router.get("/manageescaperooms", withAuthAdmin, async (req, res) => {
   try {
-    res.render("manageescaperooms", { logged_in: true });
+    const roomData = await EscapeRoom.findAll();
+
+    if (!roomData) {
+      res.status(400).json({ message: "No Escape Roooms found" });
+    }
+    const rooms = await roomData.map((room) => room.get({ plain: true }));
+
+    res.render("manageescaperooms", { rooms, logged_in: true });
   } catch (err) {}
 });
 
