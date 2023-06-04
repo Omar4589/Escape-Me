@@ -158,7 +158,7 @@ router.get("/manageusers", withAuthAdmin, async (req, res) => {
 
 router.get("/users", withAuthAdmin, async (req, res) => {
   try {
-    const users = await User.findAll({where: {isAdmin: false }});
+    const users = await User.findAll({ where: { isAdmin: false } });
     if (!users) {
       res.status(400).json({ message: "No users found" });
     }
@@ -183,6 +183,13 @@ router.delete("/users/:id", withAuthAdmin, async (req, res) => {
     res.status(500).json({ message: "An error has occured" });
     console.log(err);
   }
+});
+
+//GET route to display manage escape rooms view
+router.get("/manageescaperooms", withAuthAdmin, async (req, res) => {
+  try {
+    res.render("manageescaperooms", { logged_in: true });
+  } catch (err) {}
 });
 
 module.exports = router;
