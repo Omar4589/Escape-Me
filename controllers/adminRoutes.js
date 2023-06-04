@@ -157,4 +157,22 @@ router.get("/users", withAuthAdmin, async (req, res) => {
   }
 });
 
+//DELETE route for deleting a user
+router.delete("/users/:id", withAuthAdmin, async (req, res) => {
+  try {
+    const deleteUser = await User.destroy({
+      where: { id: req.params.id },
+    });
+    if (!deleteUser) {
+      res.status(404).json({ message: "No user with this ID found" });
+      return;
+    }
+    res.status(200).json({ message: "The user has been deleted" });
+  } catch (err) {
+    res.status(500).json({ message: "An error has occured" });
+    console.log(err);
+  }
+});
+
+
 module.exports = router;
