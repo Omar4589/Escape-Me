@@ -11,46 +11,28 @@ const fetchBookingsbyDate = async (date) => {
     );
     const data = await response.json();
     //console.log("----BOOKING DATA UNDERNEATH-----")
-    console.log(data);
+    //console.log(data);
     return data;
   } catch (error) {
     console.error("Error:", error);
   }
 };
 
-// const fetchBookingsbyUser = async (userName) => {
-//   try {
-//     const query = userName;
-//     const response = await fetch(
-//       `http://localhost:3001/admin/bookings/${query}`
-//     );
-//     const data = await response.json();
-//     //console.log("----BOOKING DATA UNDERNEATH-----")
-//     console.log(data);
-//     return data;
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// };
-
-// const fetchBookingsbyTheme = async (roomid) => {
-//   try {
-//     console.log(roomid);
-//     const ri = roomid;
-//     console.log(ri);
-//     const response = await fetch(
-//       `http://localhost:3001/admin/bookings/${ri}`
-//     );
-//     console.log(response);
-
-//     const data = await response.json();
-//     console.log("----BOOKING DATA UNDERNEATH-----");
-//     console.log(data);
-//     return data;
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// };
+const fetchBookingsbyTheme = async (roomid, date) => {
+  try {
+    const bookingdate = date;
+    const ri = roomid;
+    const response = await fetch(
+      `http://localhost:3001/admin/bookings/${ri}/${bookingdate}`
+    );
+    const data = await response.json();
+    // console.log("----BOOKING DATA UNDERNEATH-----");
+    // console.log(data);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const formatTime = (time) => {
   const parsedTime = dayjs(`2023-01-01 ${time}`);
@@ -154,13 +136,7 @@ const deleteBooking = async (event, booking) => {
   }
 };
 
-// const searchBar = $('#user-search');
-// searchBar.on('submit', () =>{
-
-// });
-
-// $("#rooms").on("change", async () => {
-//   let id = $("#rooms").val();
-//   console.log(id);
-//   await displayBookings(fetchBookingsbyTheme(id));
-// });
+$("#rooms").on("change", async () => {
+  let id = $("#rooms").val();
+  await displayBookings(fetchBookingsbyTheme(id, formattedDate));
+});
