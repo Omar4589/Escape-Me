@@ -21,14 +21,12 @@ const fetchEscapeRoomData = async (theme) => {
     const data = await response.json();
     return data;
   } catch (err) {
-    response.status(500).json({ message: err });
+    res.status(500).json({ message: err });
   }
 };
 
 const displayModal = async (theme) => {
   const data = await fetchEscapeRoomData(theme);
-  console.log("--------Room Data--------");
-  console.log(data);
   escapeRoomModal.removeClass("hidden");
   $("#escape-room-theme").html(data.theme);
   $("#escape-room-image").attr("src", data.image_url);

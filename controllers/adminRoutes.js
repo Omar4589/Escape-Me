@@ -14,7 +14,22 @@ router.get("/home", withAuthAdmin, async (req, res) => {
 
     const user = await userData.get({ plain: true });
 
-    res.render("adminHome", { ...user, logged_in: true });
+    //Find All Bookings
+
+    const bookingData = await Booking.findAll({
+      include: [
+        {
+          model: EscapeRoom,
+        },
+        { model: User },
+      ],
+    });
+
+    const bookings = await bookingData.map((booking) =>
+      booking.get({ plain: true })
+    );
+
+    res.render("adminHome", { user, bookings, logged_in: true });
   } catch (err) {
     res.status(500).json(err);
   }

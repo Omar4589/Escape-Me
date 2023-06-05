@@ -1,5 +1,11 @@
 <div class="bg-gray-100 min-h-screen">
-  <section class="text-slate-950 text-center pt-10 pb-5 w-4/5 mx-auto">
+  <button
+    class="absolute right-5 rounded-lg m-5 p-3 bg-white text-xl text-center shadow-lg hover:border-blue-700/50 hover:border-2"
+  >
+    &#128276;
+  </button>
+
+  <section class="text-slate-950 text-center pt-14 pb-5 w-4/5 mx-auto">
     <h1 class="text-4xl font-bold text-center py-2 lg:text-6xl xl:text-5xl">
       Welcome
       {{name}}
@@ -64,45 +70,41 @@
 
   </section>
 
-  <section class="py-8 grid grid-cols-1 gap-y-8 lg:mx-8">
+  <section id="bookings" class="">
+    <h1 class="text-center text-3xl my-5 font-bold">Today's Bookings &#128218;</h1>
+    <div
+      class="py-3 grid grid-cols-1 gap-y-8 md:grid-cols-2 md:mb-24 xl:grid-cols-4 xl:mx-5"
+    >
+      {{#each bookings}}
 
-    <a href="/admin/notifications"><div
-        class="flex items-center rounded-lg p-5 bg-white text-center mx-5 shadow-lg hover:border-blue-700/50 hover:border-2"
-      >
-        <h3
-          class="py-5 font-semibold text-xl border-r-2 border-gray-300 pr-4 mr-4 md:w-1/3 lg:text-3xl"
-        >Notifications &#128276;</h3>
-        <p class="text-lg w-full lg:text-2xl">
-          Review latest system notifications and alerts.
-        </p>
+        <div class="bg-white rounded-lg shadow-lg p-5 mb-5 mx-5">
 
-      </div></a>
-
-    <a href="/admin/analytics">
-      <div
-        class="flex items-center text-center rounded-lg p-5 bg-white text-center mx-5 shadow-lg hover:border-blue-700/50 hover:border-2"
-      >
-        <h3
-          class="py-5 font-semibold text-xl border-r-2 border-gray-300 pr-4 mr-4 md:w-1/3 lg:text-3xl"
-        >Analytics &#128200;</h3>
-        <p class="text-lg w-full lg:text-2xl">
-          Check your business performance.
-        </p>
-      </div></a>
-
+          <h3 class="text-xl font-bold">{{this.escaperoom.theme}}</h3>
+          <p>
+            {{this.time}}
+          </p>
+          <p>
+            {{this.date}}
+          </p>
+          <p>
+            {{this.user.name}}
+          </p>
+        </div>
+      {{/each}}
+    </div>
   </section>
+
 </div>
 
-
 <script
-      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
-      crossorigin="anonymous"
-    ></script>
+  src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+  integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+  crossorigin="anonymous"
+></script>
 
-{{!-- <script>
+{{! <script>
 let todaysDate = dayjs().format('YYYY-MM-DD')
 
 $('#bookings').attr('href', `/admin/bookings/${todaysDate}`)
 
-</script> --}}
+</script> }}
