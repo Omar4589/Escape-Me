@@ -199,4 +199,18 @@ router.get("/manageescaperooms", withAuthAdmin, async (req, res) => {
   } catch (err) {}
 });
 
+//GET route to display escape room modal
+router.get("/escaperoom/:theme", withAuthAdmin, async (req, res) => {
+  try {
+    const roomData = await EscapeRoom.findOne({ where: { theme: req.params.theme } });
+    console.log(roomData);
+    if (!roomData) {
+      res.status(400).json({ message: "No Escape Room found" });
+    }
+    //const rooms = await roomData.map((room) => room.get({ plain: true }));
+
+    res.status(200).json(roomData);
+  } catch (err) {}
+});
+
 module.exports = router;

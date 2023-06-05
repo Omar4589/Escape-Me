@@ -6,11 +6,11 @@
   <h1 class="text-center text-3xl">Active Rooms</h1>
   <div id="room-list" class="items-center grid md:grid-cols-2 lg:grid-cols-3">
     {{#each rooms}}
-      <div
+      <div id="{{this.theme}}"
         class="cursor-pointer escape-room bg-white rounded-lg mx-8 my-5 py-2 px-5"
       >
-        <h1 class="text-xl text-center p-2">{{this.theme}}</h1>
-        <img src={{this.image_url}} alt="{{this.theme}}" class="rounded-md" />
+        <h1 id="{{this.theme}}" class="text-xl text-center p-2">{{this.theme}}</h1>
+        <img src={{this.image_url}} alt="{{this.theme}}" class="rounded-md" id="{{this.theme}}" />
         {{!-- <p class="py-2">{{this.description}}</p>
         <p>Difficulty: {{this.difficulty}} </p>
         <p>Duration: {{this.duration}}</p> --}}
@@ -24,7 +24,7 @@
 <!-- Escape Room modal -->
 <div
   id="escape-room-modal"
-  class="fixed h-screen inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  class="fixed hidden h-screen inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
 >
   <div
     class="overscroll-contain max-h-screen overflow-y-auto relative bg-white p-6 rounded-lg shadow-lg w-full max-w-lg"
