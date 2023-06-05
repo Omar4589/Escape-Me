@@ -25,7 +25,26 @@
             class="dropdown-menu hidden bg-blue-700 text-white rounded py-2 absolute right-0 top-20 z-10 text-center lg:right-10 lg:text-1xl"
             id="dropdown-menu"
           >
-            {{#if logged_in}}
+
+          {{#if isAdmin}}
+           <a
+                href="/admin/bookings"
+                class="block px-4 py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
+              >Manage Bookings</a>
+              <a
+                href="/admin/users"
+                class="block px-4 py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
+              >Manage Users</a>
+              <a
+                href="/admin/ManageEscapeRooms"
+                class="block px-4 py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
+              >Manage Escape Rooms</a>
+              <button
+                id="logout"
+                class="block px-4 w-full py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
+              >Logout</button>
+              {{else}}
+              {{#if logged_in}}
               <a
                 href="/mybookings"
                 class="block px-4 py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
@@ -52,6 +71,8 @@
                 class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600 lg:px-10"
               >Sign In</a>
             {{/if}}
+          {{/if }}
+            
           </div>
 
           <!--<div class="space-x-4">

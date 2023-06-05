@@ -30,7 +30,7 @@ router.get("/home", withAuthAdmin, async (req, res) => {
       booking.get({ plain: true })
     );
 
-    res.render("adminHome", { user, bookings, logged_in: true });
+    res.render("adminHome", { user, bookings, isAdmin: true, logged_in: true });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -72,7 +72,7 @@ router.get("/bookings/", withAuthAdmin, async (req, res) => {
       bookings,
       escaperooms,
       date: dayjs(req.params.date).format("MM/DD/YYYY"),
-      logged_in: true,
+      logged_in: true, isAdmin: true
     });
   } catch (err) {
     res.status(500).json(err);
@@ -166,7 +166,7 @@ router.get("/manageusers", withAuthAdmin, async (req, res) => {
     const admin = await adminData.get({ plain: true });
     console.log(users);
     //render results using handlebars
-    res.render("manageusers", { users, admin, logged_in: true });
+    res.render("manageusers", { users, admin, isAdmin: true, logged_in: true });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -211,7 +211,7 @@ router.get("/manageescaperooms", withAuthAdmin, async (req, res) => {
     }
     const rooms = await roomData.map((room) => room.get({ plain: true }));
 
-    res.render("manageescaperooms", { rooms, logged_in: true });
+    res.render("manageescaperooms", { rooms, isAdmin: true, logged_in: true });
   } catch (err) {}
 });
 
