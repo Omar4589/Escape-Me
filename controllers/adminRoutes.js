@@ -14,7 +14,22 @@ router.get("/home", withAuthAdmin, async (req, res) => {
 
     const user = await userData.get({ plain: true });
 
-    res.render("adminHome", { ...user, logged_in: true });
+    //Find All Bookings
+
+    const bookingData = await Booking.findAll({
+      include: [
+        {
+          model: EscapeRoom,
+        },
+        { model: User },
+      ],
+    });
+
+    const bookings = await bookingData.map((booking) =>
+      booking.get({ plain: true })
+    );
+
+    res.render("adminHome", { user, bookings, logged_in: true });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -158,7 +173,7 @@ router.get("/manageusers", withAuthAdmin, async (req, res) => {
 
 router.get("/users", withAuthAdmin, async (req, res) => {
   try {
-    const users = await User.findAll({where: {isAdmin: false }});
+    const users = await User.findAll({ where: { isAdmin: false } });
     if (!users) {
       res.status(400).json({ message: "No users found" });
     }
@@ -183,6 +198,46 @@ router.delete("/users/:id", withAuthAdmin, async (req, res) => {
     res.status(500).json({ message: "An error has occured" });
     console.log(err);
   }
+});
+
+//GET route to display manage escape rooms view
+router.get("/manageescaperooms", withAuthAdmin, async (req, res) => {
+  try {
+    const roomData = await EscapeRoom.findAll();
+
+    if (!roomData) {
+      res.status(400).json({ message: "No Escape Roooms found" });
+    }
+    const rooms = await roomData.map((room) => room.get({ plain: true }));
+
+    res.render("manageescaperooms", { rooms, logged_in: true });
+  } catch (err) {}
+});
+
+//GET route to display escape room modal
+router.get("/escaperoom/:theme", withAuthAdmin, async (req, res) => {
+  try {
+    const roomData = await EscapeRoom.findOne({
+      where: { theme: req.params.theme },
+    });
+
+    if (!roomData) {
+      res.status(400).json({ message: "No Escape Room found" });
+    }
+
+    const serializedRoomData = {
+      id: roomData.id,
+      theme: roomData.theme,
+      difficulty: roomData.difficulty,
+      description: roomData.description,
+      duration: roomData.duration,
+      image_url: roomData.image_url,
+      created_at: roomData.created_at,
+      updated_at: roomData.updated_at,
+    };
+
+    res.status(200).json(serializedRoomData);
+  } catch (err) {}
 });
 
 module.exports = router;
