@@ -23,6 +23,7 @@ router.get("/home", withAuthAdmin, async (req, res) => {
         },
         { model: User },
       ],
+      order: [["time", "ASC"]], // Sort the bookings by time in ascending order
     });
 
     const bookings = await bookingData.map((booking) =>
