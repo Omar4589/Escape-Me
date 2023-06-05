@@ -29,7 +29,7 @@
           id="rooms"
           class="bg-white h-10 px-3 rounded-full text-sm focus:outline-none"
         >
-          <option value="">All</option>
+          <option value="All">All</option>
           <!-- Add options for each escape room. -->
           {{#each escaperooms}}
             <option value="{{this.id}}">{{this.theme}}</option>
@@ -42,6 +42,12 @@
 
   </section>
 </div>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+  integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+  crossorigin="anonymous"
+></script>
 
 <script src="/js/managebookings.js">
 </script>

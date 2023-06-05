@@ -221,8 +221,6 @@ router.get("/escaperoom/:theme", withAuthAdmin, async (req, res) => {
       updated_at: roomData.updated_at,
     };
 
-    console.log(serializedRoomData);
-
     res.status(200).json(serializedRoomData);
   } catch (err) {}
 });

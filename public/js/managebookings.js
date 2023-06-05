@@ -137,6 +137,13 @@ const deleteBooking = async (event, booking) => {
 };
 
 $("#rooms").on("change", async () => {
-  let id = $("#rooms").val();
-  await displayBookings(fetchBookingsbyTheme(id, formattedDate));
+  try {
+    let id = $("#rooms").val();
+    console.log(id);
+    if (id === "All") {
+      return await displayBookings(fetchBookingsbyDate(formattedDate));
+    };
+
+    await displayBookings(fetchBookingsbyTheme(id, formattedDate));
+  } catch (err) {}
 });
