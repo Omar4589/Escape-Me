@@ -1,11 +1,15 @@
 const roomDivs = $(".escape-room");
+const escapeRoomModal = $("#escape-room-modal");
+const closeModal = $("#closeModal");
+
+closeModal.on("click", () => {
+  escapeRoomModal.addClass("hidden");
+});
 
 roomDivs.on("click", (e) => {
   const theme = e.target.id;
-  console.log(theme);
-
   //make api call to fetch for escape room's info
-  fetchEscapeRoomData(theme);
+  displayModal(theme);
 });
 
 const fetchEscapeRoomData = async (theme) => {
@@ -15,8 +19,20 @@ const fetchEscapeRoomData = async (theme) => {
       `http://localhost:3001/admin/escaperoom/${roomTheme}`
     );
     const data = await response.json();
-    console.log(data);
+    return data;
   } catch (err) {
     response.status(500).json({ message: err });
   }
+};
+
+const displayModal = async (theme) => {
+  const data = await fetchEscapeRoomData(theme);
+  console.log("--------Room Data--------");
+  console.log(data);
+  escapeRoomModal.removeClass("hidden");
+  $("#escape-room-theme").html(data.theme);
+  $("#escape-room-image").attr("src", data.image_url);
+  $("#escape-room-description").html(data.description);
+  $("#escape-room-difficulty").html(data.difficulty);
+  $("#escape-room-duration").html(data.duration + " min");
 };
