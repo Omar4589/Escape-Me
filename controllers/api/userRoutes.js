@@ -1,7 +1,8 @@
 // Import necessary modules and files
 const router = require("express").Router();
-const { User, EscapeRoom, Booking } = require("../../models");
+const { User, EscapeRoom, Booking, BusinessHours } = require("../../models");
 const withAuth = require("../../utils/auth");
+const dayjs = require("dayjs");
 
 // POST route to handle user login
 router.post("/login", async (req, res) => {
@@ -89,6 +90,9 @@ router.post("/signup", async (req, res) => {
 // POST request to handle a new booking
 router.post("/booking", withAuth, async (req, res) => {
   try {
+   // Format the time into HH:mm:ss format using dayjs
+   const formattedTime = dayjs(req.body.time, 'hh:mm A').format('HH:mm:ss');
+ 
     // Check if all required fields are provided
     if (!req.body.escape_room_id || !req.body.date || !req.body.time) {
       return res
@@ -100,7 +104,7 @@ router.post("/booking", withAuth, async (req, res) => {
       escape_room_id: req.body.escape_room_id,
       user_id: req.session.user_id,
       date: req.body.date,
-      time: req.body.time,
+      time: formattedTime,
     });
 
     // If the booking is successfully created, send a success response
@@ -130,6 +134,31 @@ router.get("/:escaperoomtheme", withAuth, async (req, res) => {
     res.status(200).json({ rooms });
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+router.get("/business-hours/:day", withAuth, async (req, res) => {
+  try {
+    const selectedDate = req.params.day;
+
+    const businessHoursData = await BusinessHours.findOne({
+      where: {
+        dayOfWeek: selectedDate,
+      },
+    });
+    
+    if (!businessHoursData) {
+      return res
+        .status(404)
+        .json({ message: "No business hours for this day found." });
+    }
+
+    res.json(businessHoursData);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "An error occurred while fetching business hours." });
   }
 });
 
