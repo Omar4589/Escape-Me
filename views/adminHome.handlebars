@@ -1,10 +1,10 @@
 <div class="bg-gray-100 min-h-screen">
+  {{!-- Notification Button --}}
   <button
-    class="absolute right-5 rounded-lg m-5 p-3 bg-white text-xl text-center shadow-lg hover:border-blue-700/50 hover:border-2"
+    class="absolute right-5 rounded-lg m-5 p-3 text-xl text-center hover:border-blue-700/50 hover:border-2"
   >
     &#128276;
   </button>
-
   <section class="text-slate-950 text-center pt-14 pb-5 w-4/5 mx-auto">
     <h1 class="text-4xl font-bold text-center py-2 lg:text-6xl xl:text-5xl">
       Welcome
@@ -16,11 +16,10 @@
       convenient dashboard.
     </p>
   </section>
-
   <section
     class="py-3 grid grid-cols-1 gap-y-8 md:grid-cols-2 md:mb-24 xl:grid-cols-4 xl:mx-5"
   >
-    <a id="bookings" href="/admin/bookings"><div
+    <a id="bookings" href="/admin/managebookings"><div
         class="flex items-center rounded-lg p-5 bg-white text-center mx-5 shadow-lg hover:border-blue-700/50 hover:border-2 lg:h-36 lg:mx-5 xl:h-32"
       >
         <h3
@@ -29,9 +28,7 @@
         <p class="text-lg lg:text-2xl xl:text-lg">
           View, edit, or cancel bookings.
         </p>
-
       </div></a>
-
     <a href="/admin/manageusers">
       <div
         class="flex items-center rounded-lg bg-white p-5 mx-5 text-center shadow-lg hover:border-blue-700/50 hover:border-2 lg:h-36 lg:mx-5 xl:h-32"
@@ -42,7 +39,6 @@
         <p class="text-lg lg:text-2xl xl:text-lg">View or edit user accounts.</p>
       </div>
     </a>
-
     <a href="/admin/ManageEscapeRooms">
       <div
         class="flex items-center rounded-lg p-5 bg-white text-center mx-5 shadow-lg hover:border-blue-700/50 hover:border-2 lg:h-36 lg:mx-5 xl:h-32"
@@ -53,9 +49,7 @@
         <p class="text-lg lg:text-2xl xl:text-lg">
           Add, edit, or temporarily disable rooms.
         </p>
-
       </div></a>
-
     <a href="/admin/hours"><div
         class="flex items-center rounded-lg p-5 bg-white text-center mx-5 shadow-lg hover:border-blue-700/50 hover:border-2 lg:h-36 lg:mx-5 xl:h-32"
       >
@@ -65,43 +59,36 @@
         <p class="text-lg lg:text-2xl xl:text-lg">
           Adjust your business hours.
         </p>
-
       </div></a>
-
   </section>
-
   <section id="bookings" class="">
     <h1 class="text-center text-3xl my-5 font-bold">Today's Bookings &#128218;</h1>
     <div
       class="py-3 grid grid-cols-1 gap-y-2 md:grid-cols-2 md:mb-24 xl:grid-cols-4 xl:mx-5"
     >
+    {{!-- Here we iterate over each bookings and create these elements for each booking --}}
       {{#each bookings}}
 
-        <div class="bg-white rounded-lg shadow-lg p-5 mb-5 mx-5 relative">
+        <a
+          href="/admin/managebookings"
+          class="hover:border-blue-700/50 hover:border-2 bg-white rounded-lg shadow-lg p-5 mb-5 mx-5 relative"
+        >
           <p class="text-2xl pb-2 font-bold">{{this.user.name}}
           </p>
           <h3 class="text-xl py-2">Room: {{this.escaperoom.theme}}</h3>
 
           <p class="absolute top-3 right-5 text-right text-2xl font-bold">
+            {{!-- Here we use the helper function to format the time --}}
             {{formatTime this.time}}
           </p>
 
-        </div>
+        </a>
       {{/each}}
     </div>
   </section>
-
 </div>
-
 <script
   src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
   integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
   crossorigin="anonymous"
 ></script>
-
-{{! <script>
-let todaysDate = dayjs().format('YYYY-MM-DD')
-
-$('#bookings').attr('href', `/admin/bookings/${todaysDate}`)
-
-</script> }}

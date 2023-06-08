@@ -1,14 +1,11 @@
 const User = require('./User');
 const Booking = require('./Booking');
-// const UserBooking = require("./UserBooking");
 const EscapeRoom = require('./EscapeRoom');
-// const Leaderboard = require("./Leaderboard");
-// const Review = require("./Review");
 
-// Define relationships between models
+// Defining the relationships between the User, Booking and EscapeRoom models
 User.hasMany(Booking, {
   foreignKey: 'user_id',
-  onDelete: 'CASCADE',
+  onDelete: 'CASCADE', // Deleting all bookings when a user is deleted
 });
 
 Booking.belongsTo(User, {
@@ -17,7 +14,7 @@ Booking.belongsTo(User, {
 
 EscapeRoom.hasMany(Booking, {
   foreignKey: 'escape_room_id',
-  onDelete: 'CASCADE',
+  onDelete: 'CASCADE', // Deleting all bookings when an escape room is deleted
 });
 
 Booking.belongsTo(EscapeRoom, {
@@ -27,8 +24,5 @@ Booking.belongsTo(EscapeRoom, {
 module.exports = {
   User,
   Booking,
-  // UserBooking,
   EscapeRoom,
-  // Leaderboard,
-  // Review,
 };
