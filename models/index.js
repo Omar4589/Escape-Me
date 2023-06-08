@@ -1,6 +1,7 @@
 const User = require('./User');
 const Booking = require('./Booking');
 const EscapeRoom = require('./EscapeRoom');
+const BusinessHours = require('./BusinessHours');
 
 // Defining the relationships between the User, Booking and EscapeRoom models
 User.hasMany(Booking, {
@@ -25,4 +26,5 @@ module.exports = {
   User,
   Booking,
   EscapeRoom,
+  BusinessHours,
 };
