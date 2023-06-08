@@ -62,7 +62,7 @@ const displayBookings = async (call) => {
   };
 
   // Clear existing bookings
-  //$("#bookings").empty();
+  $("#bookings").empty();
   // Loop over each booking and create and append elements to the DOM
   bookings.forEach((booking) => {
     const bookingTime = formatTime(booking.time);
