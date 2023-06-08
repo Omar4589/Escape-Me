@@ -1,4 +1,9 @@
 <div class="bg-gray-100 min-h-screen p-5">
+   <div
+      id="notification"
+      class=" hidden fixed mx-auto top-0 left-96 right-96 text-center bg-blue-500 text-slate-50 px-5 py-3 m-4 rounded shadow-lg"
+    >
+    </div>
   <section class="text-slate-950 text-center pt-10 pb-5 w-4/5 mx-auto">
     <h1 class="text-4xl font-bold text-center py-2 lg:text-6xl xl:text-5xl">
       Manage Bookings
@@ -30,7 +35,7 @@
           class="bg-white h-10 px-3 rounded-full text-sm focus:outline-none"
         >
           <option value="All">All</option>
-          <!-- Add options for each escape room. -->
+          <!-- Here we iterate over each escape room and make it's theme an option for the dropdown. -->
           {{#each escaperooms}}
             <option value="{{this.id}}">{{this.theme}}</option>
           {{/each}}

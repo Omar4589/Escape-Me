@@ -18,15 +18,18 @@
       </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
+      {{!-- Here we iterate over each booking and create a table with their information --}}
       {{#each bookings}}
         <tr>
           <td class="px-6 py-4 whitespace-nowrap">{{this.escaperoom.theme}}</td>
+          {{!-- Here we use helper function to format Date and Time --}}
           <td class="px-6 py-4 whitespace-nowrap">{{formatDate this.date}}</td>
           <td class="px-6 py-4 whitespace-nowrap">{{formatTime this.time}}</td>
         </tr>
       {{/each}}
     </tbody>
   </table>
+  {{!-- If there are no boookings, we display a p element that says "You have no bookings yet". --}}
   {{#if noBookings}}
     <div class="text-center mt-6">
       <p class="text-gray-600">You have no bookings yet.</p>

@@ -23,7 +23,7 @@
       {{#each rooms}}
         <div
           id="{{this.theme}}"
-          class="escape-room bg-white shadow-lg rounded-lg p-6"
+          class="cursor-pointer escape-room bg-white shadow-lg rounded-lg p-6"
         >
           <img
             src="{{this.image_url}}"
@@ -41,6 +41,7 @@
   </div>
 </section>
 
+{{!-- Escape Room Modal starts here --}}
 <modal
   id="escape-room-modal"
   class="fixed hidden h-screen inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
@@ -85,24 +86,6 @@
     >Book This Room</button>
 
   </div></modal>
+{{!-- Escape Room Modal ends Here --}}
 
-<script>
-
-  const escapeRoomCards = $('.escape-room'); escapeRoomCards.on('click', async (e) => { 
-    const escapeRoomTheme = e.currentTarget.id;
-    const domain = window.location.hostname;
-    const response = await fetch(`https://${domain}/${escapeRoomTheme}`); //change this to actual website URL in produciton, use template literal to insert domain variable
-    const data = await response.json();
-    //open a modal that displays the escape room information
-const img = $('#escape-room-image').attr('src', data.rooms[0].image_url);
-const theme = $('#theme').text(data.rooms[0].theme);
-const difficulty = $('#difficulty-level').text(data.rooms[0].difficulty);
-const duration = $('#duration').text(data.rooms[0].duration);
-const description = $('#description').text(data.rooms[0].description);
-const modal = $('#escape-room-modal').removeClass('hidden');
- });
-
-   $("#closeModal").on("click", () => $("#escape-room-modal").addClass("hidden"));
-
-  
-</script>
+<script src="/js/userHome.js"></script>

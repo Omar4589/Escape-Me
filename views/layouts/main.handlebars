@@ -8,43 +8,49 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   </head>
   <body>
-    <header>
-      <header class="bg-blue-700">
-        <nav
-          class="container mx-auto flex justify-between items-center text-slate-50 p-4"
+    <div
+      id="notification"
+      class="hidden fixed mx-auto top-0 left-96 right-96 text-center bg-blue-500 text-slate-50 px-5 py-3 m-4 rounded shadow-lg"
+    ></div>
+    <header class="bg-blue-700">
+      <nav
+        class="container mx-auto flex justify-between items-center text-slate-50 p-4"
+      >
+        {{! If the user is logged in, the escape Me header redirects to /home }}
+        {{#if logged_in}}
+          <a href="/home" class="w-4/5 font-bold text-4xl">Escape Me</a>
+        {{else}}
+          {{! we redirect user to root path if theyre not logged in and they click the heading }}
+          <a href="/" class="w-4/5 font-bold text-4xl">Escape Me</a>
+        {{/if}}
+        <button class="text-5xl" id="menu-toggle">
+          &#9776;
+        </button>
+        <div
+          class="dropdown-menu hidden bg-blue-700 text-white rounded py-2 absolute right-0 top-20 z-10 text-center lg:right-10 lg:text-1xl"
+          id="dropdown-menu"
         >
-          {{#if logged_in}}
-            <a href="/home" class="w-4/5 font-bold text-4xl">Escape Me</a>
-          {{else}}
-            <a href="/" class="w-4/5 font-bold text-4xl">Escape Me</a>
-          {{/if}}
-          <button class="text-5xl" id="menu-toggle">
-            &#9776;
-          </button>
-          <div
-            class="dropdown-menu hidden bg-blue-700 text-white rounded py-2 absolute right-0 top-20 z-10 text-center lg:right-10 lg:text-1xl"
-            id="dropdown-menu"
-          >
-
+          {{! If the user is an admin, they see these options }}
           {{#if isAdmin}}
-           <a
-                href="/admin/bookings"
-                class="block px-4 py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
-              >Manage Bookings</a>
-              <a
-                href="/admin/users"
-                class="block px-4 py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
-              >Manage Users</a>
-              <a
-                href="/admin/ManageEscapeRooms"
-                class="block px-4 py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
-              >Manage Escape Rooms</a>
-              <button
-                id="logout"
-                class="block px-4 w-full py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
-              >Logout</button>
-              {{else}}
-              {{#if logged_in}}
+            <a
+              href="/admin/managebookings"
+              class="block px-4 py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
+            >Manage Bookings</a>
+            <a
+              href="/admin/manageusers"
+              class="block px-4 py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
+            >Manage Users</a>
+            <a
+              href="/admin/ManageEscapeRooms"
+              class="block px-4 py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
+            >Manage Escape Rooms</a>
+            <button
+              id="logout"
+              class="block px-4 w-full py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
+            >Logout</button>
+          {{else}}
+            {{! if the user is not an admin, but they are logged in, they see these options }}
+            {{#if logged_in}}
               <a
                 href="/mybookings"
                 class="block px-4 py-2 hover:bg-slate-50 hover:text-blue-700 lg:px-10"
@@ -71,16 +77,10 @@
                 class="block px-4 py-2 hover:bg-slate-50 hover:text-indigo-600 lg:px-10"
               >Sign In</a>
             {{/if}}
-          {{/if }}
-            
-          </div>
+          {{/if}}
 
-          <!--<div class="space-x-4">
-        <a href="#" class="text-white">Sign Up</a>
-        <a href="#" class="bg-white text-blue-500 px-4 py-2 rounded">Sign In</a>
-      </div>-->
-        </nav>
-      </header>
+        </div>
+      </nav>
     </header>
     <main>{{{body}}}</main>
     <footer class="bg-blue-700 text-white py-6 px-4">
@@ -95,13 +95,11 @@
         </div>
       </div>
     </footer>
-
-    
-
     <!-- Render script for logged in users only -->
     {{#if logged_in}}
       <script src="/js/logout.js"></script>
     {{/if}}
+    {{!-- This handles the menu button click, displaying the nav menu --}}
     <script>
       $(document).ready(function() { $('#menu-toggle').on('click', function() {
       $('#dropdown-menu').toggleClass('hidden'); }); });

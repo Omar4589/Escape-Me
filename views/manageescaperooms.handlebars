@@ -1,10 +1,16 @@
 <div class="bg-gray-100 min-h-screen">
+   <div
+      id="notification"
+      class=" hidden fixed mx-auto top-0 left-96 right-96 text-center bg-blue-500 text-slate-50 px-5 py-3 m-4 rounded shadow-lg"
+    >
+    </div>
   <div class="mx-5"><button
       class="my-5 bg-blue-700 rounded-lg text-center text-slate-50 px-2 py-1"
     >+ Create Room</button>
   </div>
   <h1 class="text-center text-3xl">Active Rooms</h1>
   <div id="room-list" class="items-center grid md:grid-cols-2 lg:grid-cols-3">
+    {{!-- Here we iterate over each room and create elements for each to display it's info --}}
     {{#each rooms}}
       <div
         id="{{this.theme}}"
@@ -20,13 +26,11 @@
           class="rounded-md"
           id="{{this.theme}}"
         />
-        {{!-- <p class="py-2">{{this.description}}</p>
-        <p>Difficulty: {{this.difficulty}} </p>
-        <p>Duration: {{this.duration}}</p> --}}
       </div>
     {{/each}}
+    <h1 class="text-center text-3xl">Disabled Rooms</h1>
+     {{!-- Any disable rooms appear here --}}
   </div>
-  <h1 class="text-center text-3xl">Disabled Rooms</h1>
 
 </div>
 
@@ -38,6 +42,7 @@
   <div
     class="overscroll-contain max-h-screen overflow-y-auto relative bg-white p-6 rounded-lg shadow-lg w-full max-w-lg"
   >
+  {{!-- Close modal icon --}}
     <span
       id="closeModal"
       class="absolute top-5 right-8 text-xl font-bold cursor-pointer"

@@ -1,13 +1,13 @@
+// Imports necessary files
 const router = require('express').Router();
-
 const apiRoutes = require('./api');
-const publicRoutes = require('./publicRoutes');
-const privateRoutes = require('./privateRoutes');
-const adminRoutes = require('./adminRoutes');
+const viewsRoutes = require('./views');
 
-router.use('/', publicRoutes);
-router.use('/', privateRoutes);
+// Routes for API endpoints
 router.use('/api', apiRoutes);
-router.use('/admin', adminRoutes);
 
+// Routes for views rendering
+router.use('/', viewsRoutes);
+
+// Exports routes
 module.exports = router;

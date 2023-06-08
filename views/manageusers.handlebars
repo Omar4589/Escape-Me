@@ -1,4 +1,9 @@
 <div class="bg-gray-100 min-h-screen p-5">
+ <div
+      id="notification"
+      class=" hidden fixed mx-auto top-0 left-96 right-96 text-center bg-blue-500 text-slate-50 px-5 py-3 m-4 rounded shadow-lg"
+    >
+    </div>
   <section class="text-slate-950 text-center pt-10 pb-5 w-4/5 mx-auto">
     <h1 class="text-4xl font-bold text-center py-2 lg:text-6xl xl:text-5xl">
       Manage Users
@@ -7,22 +12,18 @@
       View, edit, or delete user accounts.
     </p>
   </section>
-
   <section class="py-3 px-5">
     <div class="flex justify-around mb-5">
-
       <div class="mb-5 flex justify-between items-center">
         <p class="text-lg font-bold mb-2">Filter by:</p>
         <select
           class="bg-white ml-5 h-10 px-5 rounded-full text-sm focus:outline-none"
         >
           <option value="">All</option>
-          <!-- Add options for each escape room. -->
           <option value="name">Name</option>
           <option value="email">Email</option>
         </select>
       </div>
-
       <div class="relative">
         <input
           type="text"
@@ -34,7 +35,6 @@
         </button>
       </div>
     </div>
-
     <table id="users" class="w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">
         <tr>
@@ -60,20 +60,13 @@
           >Edit or Delete User</th>
         </tr>
       <tbody class="bg-white divide-y divide-gray-200" id="users-list"></tbody>
-
     </table>
-
   </section>
 </div>
-
-
-
 <script
   src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
   integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
   crossorigin="anonymous"
 ></script>
-
-
 <script src="/js/manageusers.js">
 </script>
